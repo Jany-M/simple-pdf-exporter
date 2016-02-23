@@ -11,6 +11,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
+NOT SUITABLE FOR PRODUCTION SITES YET.
+STILL CONTAINS VARIOUS HARDCODED THINGS.
+
 This plugin uses the DOMPDF Library to generate PDFs for whole post types, with cover page and index page, with a custom order (by custom field & name).
 
 
