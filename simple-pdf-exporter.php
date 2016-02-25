@@ -9,7 +9,7 @@
  * License: GPLv3
 */
 
-define('SIMPLE_PDF_EXPORT_VERSION', '1.3');
+define('SIMPLE_PDF_EXPORT_VERSION', '1.5');
 //define('DISABLE_PDF_CACHE', true);
 
 /*ini_set('display_errors', 1);
@@ -82,10 +82,6 @@ error_reporting(E_ERROR | E_PARSE);*/
             }
 
             public static function deactivate() {
-                /*if (!defined('WP_UNINSTALL_PLUGIN')) {
-                    exit();
-                }*/
-
                 // Remove cronjob
                 wp_clear_scheduled_hook('pdf_export_cronjob_every_24h');
 
