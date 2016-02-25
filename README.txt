@@ -28,6 +28,10 @@ This plugin uses the DOMPDF Library to generate PDFs for whole post types, with 
 
 = I don't like the way my PDF printing looks. How do I change it? =
 
+= I want to override the cache =
+Use &force after your url
+eg. http://yoursite.com/?export=pdf&force
+
 
 == Screenshots == 
 

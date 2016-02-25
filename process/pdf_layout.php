@@ -1,101 +1,36 @@
 <?php 
+require_once(PDF_PROCESS.'config.php');
 
-require_once(__DIR__."/config.php"); //$posts_per_page definition
-
-
-function pdfstyle() { ?>
+/*function pdfstyle() { 
+	
+	?>
 		<!DOCTYPE html>
 		<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
-		<head></head>
+		<head>
+		<link rel="stylesheet" href="<?php echo $pdf_export_css_file; ?>" type="text/css" media="print" />
+		</head>
 		<body>
-		<style type="text/css">
-		@page { margin: 10px; }
-		body { margin: 0px; }
-		 body, .main_div {font-family:Arial,sans-serif; font-size:8px;  }
-		 p, .inner_txt {font-size: 8px; /*line-height: 10px;*/ font-weight: bold;}
-		 p {margin: 0;}
-		 h1, h2 {font-size: 11px; /*line-height: 13px;*/}
-		 h3 {font-size: 9px; /*line-height: 11px;*/}
-		 a {color:#000; text-decoration:none;}
-		 td {border: none; /*display: inline-block; width:100%;*/margin: 0; padding: 0; overflow: hidden; }
-		 .inline {display:inline;}
-		 .db {display:block;}
-		 .dib {display:inline-block;}
-		 .lightgrey {color: #454545;}
-		 .inner_txt {margin-bottom: 0; }
-		 .fwnormal {font-weight: normal;}
-		 .upper {text-transform: uppercase;}
-		 .left{float:left; text-align:left;}
-		 .right{float:right; text-align:right;}
-		 .hr{background: transparent; border: 0 0 1px 0; border-style: dashed; border-color: #999;}
-		 .table5{margin-bottom: 5px;}
-		 .table10{margin-bottom: 10px;}
-		 .tableborder5{border:1px solid #999; margin-bottom: 5px;}
-		 .tableborder5{border:1px solid #999; margin-bottom: 10px;}
-		 .tableborder20{border:1px solid #999; margin-bottom: 20px;}
-		 .border_bottom1{border-bottom:1px solid #C4C2C2;}
-		 .padding_left10{padding-left:10px;}
-		 .w100percent{width:100%;}
-		 .w90 {width:90%;}
-		 .w98percent{width:98%;}
-		 .w95percent{width:95%;}
-		 .w90percent{width:90%;}
-		 .w85percent{width:85%;}
-		 .w80percent{width:80%;}
-		 .w55percent{width:55%;}
-		 .w45percent{width:45%;}
-		 .w33percent{width:33%;}
-		 .w34percent{width:34%;}
-		 .w25percent{width:25%;}
-		 .w15percent{width:15%;}
-		 .w10{width: 10%;}
-		 .fleft{float:left;}
-		 .fright{float:right;}
-		 .padding0 {padding:0;}
-		 .padding_bottom1 {padding-bottom: 1px}
-		 .padding_bottom3 {padding-bottom:3px;}
-		 .padding_bottom5 {padding-bottom:5px;}
-		 .padding_bottom10 {padding-bottom:10px;}
-		 .padding_bottom15 {padding-bottom:15px;}
-		 .padding_top3{padding-top:3px;}
-		 .padding_top5{padding-top:5px;}
-		 .padding_top10{padding-top:10px;}
-		 .padding_top15{padding-top:15px;}
-		 .padding_top20{padding-top:20px;}
-		 .fwbold{font-weight:bold;}
-		 .taligncenter{text-align:center;}
-		 .margin0 {margin:0;}
-		 .margin_top0{margin-top:0;}
-		 .margin_top3{margin-top:3px;}
-		 .margin_top5{margin-top:5px;}
-		 .margin_top10{margin-top:10px;}
-		 .margin_top15{margin-top:15px;}
-		 .margin_top20{margin-top:20px;}
-		 .margin_top30{margin-top:30px;}
-		 .margin_top40{margin-top:40px;}
-		 .margin_bottom3{margin-bottom:3px;}
-		 .margin_bottom5{margin-bottom:5px;}
-		 .margin_bottom10{margin-bottom:10px;}
-		 .margin_bottom15{margin-bottom:15px;}
-		 .margin_bottom20{margin-bottom:20px;}
-		 .margin_bottom30{margin-bottom:20px;}
-		 .margin_bottom40{margin-bottom:40px;}
-		 .margin_left10{margin-left:10px;}
-		 .padding_right10{padding-right:10px;}
-		 .padding_right20{padding-right:20px;}
-		 .padding_right30{padding-right:10px;}		 
-		</style>
 	<?php		
-}
+}*/
 
 function get_all_rate_plan($post_id, $term ) {
+		global $pdf_export_css_file;
+
 		$html = '';
 		$post = get_post($post_id);
 		ob_start();
-		pdfstyle();
+
+		//pdfstyle();
+		echo '<!DOCTYPE html>
+		<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+		<head>
+		<link rel="stylesheet" type="text/css" href="'.$pdf_export_css_file.'" />
+		</head>
+		<body>';
+
 		echo '<div class="main_div">';
 			//echo '<div class="left"><a  href="'.get_home_url().'">'.get_home_url().'</a></div>';
-			echo '<div class="right margin0 padding0" style="height:1px overflow:hidden;""><a class="margin0 padding0" href="'.get_permalink($post->ID).'">'.get_permalink($post->ID).'</a></div><br/>';
+			echo '<div class="right margin0 padding0" style="height:1px overflow:hidden;"><a class="margin0 padding0" href="'.get_permalink($post->ID).'">'.get_permalink($post->ID).'</a></div><br/>';
 			//echo '<hr class="hr" />';
 			echo '<div class="right">EAME RM - CONFIDENTIAL</div>';
 		  echo '<table cellspacing="0" width="100%" class="margin0 padding0">';

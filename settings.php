@@ -1,4 +1,237 @@
-<?php
+<?php // http://wpsettingsapi.jeroensormani.com/
+/*
+add_action( 'admin_menu', 'spe_add_admin_menu' );
+add_action( 'admin_init', 'spe_settings_init' );
+
+
+function spe_add_admin_menu(  ) { 
+
+    add_submenu_page( 'tools.php', 'Simple PDF Export', 'Simple PDF Export', 'manage_options', 'simple_pdf_export', 'simple_pdf_export_options_page' );
+
+}
+
+
+function spe_settings_init(  ) { 
+
+    register_setting( 'pluginPage', 'spe_settings' );
+
+    add_settings_section(
+        'spe_pluginPage_section', 
+        __( 'Your section description', 'simple_pdf_export' ), 
+        'spe_settings_section_callback', 
+        'pluginPage'
+    );
+
+    add_settings_field( 
+        'spe_checkbox_field_0', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_checkbox_field_0_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+    add_settings_field( 
+        'spe_checkbox_field_1', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_checkbox_field_1_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+    add_settings_field( 
+        'spe_text_field_2', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_text_field_2_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+    add_settings_field( 
+        'spe_checkbox_field_3', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_checkbox_field_3_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+    add_settings_field( 
+        'spe_text_field_4', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_text_field_4_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+    add_settings_field( 
+        'spe_checkbox_field_5', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_checkbox_field_5_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+    add_settings_field( 
+        'spe_text_field_6', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_text_field_6_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+    add_settings_field( 
+        'spe_checkbox_field_7', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_checkbox_field_7_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+    add_settings_field( 
+        'spe_text_field_8', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_text_field_8_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+    add_settings_field( 
+        'spe_text_field_9', 
+        __( 'Settings field description', 'simple_pdf_export' ), 
+        'spe_text_field_9_render', 
+        'pluginPage', 
+        'spe_pluginPage_section' 
+    );
+
+
+}
+
+
+function spe_checkbox_field_0_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='checkbox' name='spe_settings[spe_checkbox_field_0]' <?php checked( $options['spe_checkbox_field_0'], 1 ); ?> value='1'>
+    <?php
+
+}
+
+
+function spe_checkbox_field_1_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='checkbox' name='spe_settings[spe_checkbox_field_1]' <?php checked( $options['spe_checkbox_field_1'], 1 ); ?> value='1'>
+    <?php
+
+}
+
+
+function spe_text_field_2_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='text' name='spe_settings[spe_text_field_2]' value='<?php echo $options['spe_text_field_2']; ?>'>
+    <?php
+
+}
+
+
+function spe_checkbox_field_3_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='checkbox' name='spe_settings[spe_checkbox_field_3]' <?php checked( $options['spe_checkbox_field_3'], 1 ); ?> value='1'>
+    <?php
+
+}
+
+
+function spe_text_field_4_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='text' name='spe_settings[spe_text_field_4]' value='<?php echo $options['spe_text_field_4']; ?>'>
+    <?php
+
+}
+
+
+function spe_checkbox_field_5_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='checkbox' name='spe_settings[spe_checkbox_field_5]' <?php checked( $options['spe_checkbox_field_5'], 1 ); ?> value='1'>
+    <?php
+
+}
+
+
+function spe_text_field_6_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='text' name='spe_settings[spe_text_field_6]' value='<?php echo $options['spe_text_field_6']; ?>'>
+    <?php
+
+}
+
+
+function spe_checkbox_field_7_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='checkbox' name='spe_settings[spe_checkbox_field_7]' <?php checked( $options['spe_checkbox_field_7'], 1 ); ?> value='1'>
+    <?php
+
+}
+
+
+function spe_text_field_8_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='text' name='spe_settings[spe_text_field_8]' value='<?php echo $options['spe_text_field_8']; ?>'>
+    <?php
+
+}
+
+
+function spe_text_field_9_render(  ) { 
+
+    $options = get_option( 'spe_settings' );
+    ?>
+    <input type='text' name='spe_settings[spe_text_field_9]' value='<?php echo $options['spe_text_field_9']; ?>'>
+    <?php
+
+}
+
+
+function spe_settings_section_callback(  ) { 
+
+    echo __( 'This section description', 'simple_pdf_export' );
+
+}
+
+
+function spe_options_page(  ) { 
+
+    ?>
+    <form action='options.php' method='post'>
+        
+        <h2>Simple PDF Export</h2>
+        
+        <?php
+        settings_fields( 'pluginPage' );
+        do_settings_sections( 'pluginPage' );
+        submit_button();
+        ?>
+        
+    </form>
+    <?php
+
+}*/
+
+
 if(!class_exists('SIMPLE_PDF_EXPORT_SETTINGS')) {
 
     class SIMPLE_PDF_EXPORT_SETTINGS  {

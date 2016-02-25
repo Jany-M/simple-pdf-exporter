@@ -1,64 +1,43 @@
 <?php
-$wp_path = explode('wp-content', dirname(__FILE__)); 
-require_once($wp_path[0].'wp-load.php');
-require_once plugin_dir_path(__FILE__) . 'autoload.inc.php';
-use Dompdf\Dompdf;
 
-require_once(PDF_LIBS."fpdf/fpdf.php");
-require_once(PDF_LIBS."fpdi/fpdi.php");
-require_once(PDF_LIBS."fpdi_addon/annots.php");
-require_once(PDF_LIBS."pageno/pdfnumber.php");
-require_once(PDF_LIBS."pageno/pageno.php");
-require_once(PDF_LIBS."pdfmerger/pdfmerger.php");
+$pdf_export_post_type = '';
+global $pdf_export_post_type;
 
-global $pdf_export_check;
 function pdf_export(){
-    global $pdf_export_check;
-
+    
+    global $pdf_export_post_type;
+    $pdf_export_post_type = isset($_REQUEST['post_type']) ? $_REQUEST['post_type'] : 'rate-plan';
     $pdf_export_check = isset($_REQUEST['export']) ? $_REQUEST['export'] : '';
+    $final_pdf = PDF_EXPORT.$pdf_export_post_type.'_pricing_guidelines-'.date('dMY').'.pdf';
+    
     if ($pdf_export_check == 'pdf') {
 
-        if (!file_exists(PDF_EXPORT.'eame_pricing_guidelines-'.date('dMY-H').'.pdf')) {
+        if (isset($_REQUEST['force']) || !file_exists($final_pdf) || date("dMY-H", filemtime($final_pdf)) != date('dMY-H')) {
 
-            /*ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            //error_reporting(E_ALL);
-            error_reporting(E_ERROR | E_PARSE);*/
-            ini_set("error_log", "/var/log/php-fpm/pdf-gen.log");
-
-            require_once(PDF_PROCESS."config.php");
-            require_once(PDF_PROCESS."pdf_layout.php");
-            require_once(PDF_PROCESS."generate_pdfs_with_pageno.php");
-            require_once(PDF_PROCESS."mergepdf.php");
+            require_once(PDF_PROCESS."create_pagenumber_merge.php");
             require_once(PDF_PROCESS."index_page.php");
             require_once(PDF_PROCESS."cover_page.php");
-            require_once(PDF_PROCESS."mergepdffinal.php");
+            require_once(PDF_PROCESS."final_merge.php");
 
-            generate_pdfs_with_pageno();
-            mergepdf();
+            create_pagenumber_merge();
             index_page();
             cover_page();
-            mergepdffinal();
-
-            /*ini_set('display_errors', 0);
-            ini_set('display_startup_errors', 0);
-            error_reporting(-1);*/
+            final_merge();
 
         }
         
-        $fileloc = PDF_EXPORT.'eame_pricing_guidelines-'.date('dMY-H').'.pdf';
-        $filename = 'eame_pricing_guidelines-'.date('dMY-H').'.pdf';
+        $final_pdf = PDF_EXPORT.$pdf_export_post_type.'_pricing_guidelines-'.date('dMY').'.pdf';
+        $filename = $pdf_export_post_type.'_pricing_guidelines-'.date('dMY').'.pdf';
         header('Content-type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
         header('Content-Transfer-Encoding: binary');
-        header('Content-Length: ' . filesize($fileloc));
+        header('Content-Length: ' . filesize($final_pdf));
         header('Accept-Ranges: bytes');
-        readfile($fileloc);
+        readfile($final_pdf);
 
         exit();
 
     }
-
    
 }
 
