@@ -13,80 +13,79 @@ ul#answers li {margin-top:1.8em}
 <body>
 <h1>FAQ</h1>
 <ul>
-<li><b>1.</b> <a href='#q1'>What's exactly the license of FPDF? Are there any usage restrictions?</a></li>
-<li><b>2.</b> <a href='#q2'>I get the following error when I try to generate a PDF: Some data has already been output, can't send PDF file</a></li>
-<li><b>3.</b> <a href='#q3'>Accented letters are replaced with some strange characters like Ã©.</a></li>
-<li><b>4.</b> <a href='#q4'>I try to display the Euro symbol but it doesn't work.</a></li>
-<li><b>5.</b> <a href='#q5'>I try to display a variable in the Header method but nothing prints.</a></li>
-<li><b>6.</b> <a href='#q6'>I have defined the Header and Footer methods in my PDF class but nothing shows.</a></li>
-<li><b>7.</b> <a href='#q7'>I can't make line breaks work. I put \n in the string printed by MultiCell but it doesn't work.</a></li>
-<li><b>8.</b> <a href='#q8'>I use jQuery to generate the PDF but it doesn't show.</a></li>
-<li><b>9.</b> <a href='#q9'>I draw a frame with very precise dimensions, but when printed I notice some differences.</a></li>
-<li><b>10.</b> <a href='#q10'>I'd like to use the whole surface of the page, but when printed I always have some margins. How can I get rid of them?</a></li>
-<li><b>11.</b> <a href='#q11'>How can I put a background in my PDF?</a></li>
-<li><b>12.</b> <a href='#q12'>How can I set a specific header or footer on the first page?</a></li>
-<li><b>13.</b> <a href='#q13'>I'd like to use extensions provided by different scripts. How can I combine them?</a></li>
-<li><b>14.</b> <a href='#q14'>How can I open the PDF in a new tab?</a></li>
-<li><b>15.</b> <a href='#q15'>How can I send the PDF by email?</a></li>
-<li><b>16.</b> <a href='#q16'>What's the limit of the file sizes I can generate with FPDF?</a></li>
-<li><b>17.</b> <a href='#q17'>Can I modify a PDF with FPDF?</a></li>
-<li><b>18.</b> <a href='#q18'>I'd like to make a search engine in PHP and index PDF files. Can I do it with FPDF?</a></li>
-<li><b>19.</b> <a href='#q19'>Can I convert an HTML page to PDF with FPDF?</a></li>
-<li><b>20.</b> <a href='#q20'>Can I concatenate PDF files with FPDF?</a></li>
+<li><b>1.</b> <a href='#q1'>Esattamente qual'è la licenza di FPDF? Ci sono limitazioni all'utilizzo?</a></li>
+<li><b>2.</b> <a href='#q2'>Quando tento di generare un PDF, ricevo il seguente messaggio di errore: "Some data has already been output, can't send PDF file".</a></li>
+<li><b>3.</b> <a href='#q3'>I caratteri accentati vengono sostituiti da strani caratteri come Ã©.</a></li>
+<li><b>4.</b> <a href='#q4'>Tento di inserire il simbolo dell'Euro ma non funziona.</a></li>
+<li><b>5.</b> <a href='#q5'>Provo a visualizzare una variabile nel metodo Header, ma non viene stampato nulla.</a></li>
+<li><b>6.</b> <a href='#q6'>Ho definito i metodi Header e Footer nella mia classe PDF ma non appare nulla.</a></li>
+<li><b>7.</b> <a href='#q7'>Non riesco a far funzionare le interruzioni di linea. Inserisco i \n nella stringa stampata da MultiCell ma non funziona.</a></li>
+<li><b>8.</b> <a href='#q8'>Per generare il PDF uso jQuery, ma non viene mostrato.</a></li>
+<li><b>9.</b> <a href='#q9'>Ho disegnato un frame di dimensioni molto precise, ma quando viene stampato noto alcune differenze.</a></li>
+<li><b>10.</b> <a href='#q10'>Vorrei utilizzare l'intera superficie della pagina, ma quando stampo restano sempre alcuni margini. Come posso eliminarli?</a></li>
+<li><b>11.</b> <a href='#q11'>Come posso impostare uno sfondo nel mio PDF?</a></li>
+<li><b>12.</b> <a href='#q12'>Come posso impostare una specifica intestazione o un piede nella prima pagina?</a></li>
+<li><b>13.</b> <a href='#q13'>Vorrei poter utilizzare estensioni rese disponibili tramite diversi script. Come posso combinarle?</a></li>
+<li><b>14.</b> <a href='#q14'>Come posso aprire il PDF in una nuova scheda?</a></li>
+<li><b>15.</b> <a href='#q15'>Come posso inviare il PDF tramite email?</a></li>
+<li><b>16.</b> <a href='#q16'>Qual'è il limite delle dimensioni dei file che posso generare con FPDF?</a></li>
+<li><b>17.</b> <a href='#q17'>Posso modificare un PDF con FPDF?</a></li>
+<li><b>18.</b> <a href='#q18'>Vorrei creare un motore di ricerca in PHP e indicizzare i file PDF. Posso farlo utilizzando FPDF?</a></li>
+<li><b>19.</b> <a href='#q19'>Posso convertire una pagina HTML in PDF con FPDF?</a></li>
+<li><b>20.</b> <a href='#q20'>Posso concatenare files PDF con FPDF?</a></li>
 </ul>
 
 <ul id='answers'>
 <li id='q1'>
-<p><b>1.</b> <span class='question'>What's exactly the license of FPDF? Are there any usage restrictions?</span></p>
-FPDF is released under a permissive license: there is no usage restriction. You may embed it
-freely in your application (commercial or not), with or without modifications.
+<p><b>1.</b> <span class='question'>Esattamente qual'è la licenza di FPDF? Ci sono limitazioni all'utilizzo?</span></p>
+FPDF è rilasciata con licenza permissiva: non vi sono restrizioni di utilizzo. Puoi incorporarla
+liberamente nelle tue applicazioni (commerciali o meno), con o senza modifiche.
 </li>
 
 <li id='q2'>
-<p><b>2.</b> <span class='question'>I get the following error when I try to generate a PDF: Some data has already been output, can't send PDF file</span></p>
-You must send nothing to the browser except the PDF itself: no HTML, no space, no carriage return. A common
-case is having extra blank at the end of an included script file.<br>
-If you can't figure out where the problem comes from, this other message appearing just before can help you:<br>
+<p><b>2.</b> <span class='question'>Quando tento di generare un PDF, ricevo il seguente messaggio di errore: "Some data has already been output, can't send PDF file".</span></p>
+Non devi inviare al browser nient'altro che il solo PDF: non HTML, nessuno spazio o ritorno di carrello. Un
+caso comune consiste nell'avere uno spazio bianco indesiderato alla fine dello script di un file incluso.<br>
+Se non riesci a determinare da dove possa derivare l'errore, il seguente altro messaggio di errore
+eventualmente apparso appena prima potrà aiutarti:<br>
 <br>
-<b>Warning:</b> Cannot modify header information - headers already sent by (output started at script.php:X)<br>
+<b>Warning:</b> Cannot modify header information - headers already sent by (output started at script.php:X).<br>
 <br>
-It means that script.php outputs something at line X. Go to this line and fix it.
-In case the message doesn't show, first check that you didn't disable warnings, then add this at the very
-beginning of your script:
+Ciò significa che lo script.php genera qualche output alla riga X. Vai a tale linea di codice e correggila.
+Nel caso in cui tale messaggio non appaia, prima controlla di non aver disabilitato i messaggi d'errore e
+poi aggiungi all'inizio del tuo script le seguenti linee:
 <div class="doc-source">
 <pre><code>ob_end_clean();</code></pre>
 </div>
-If you still don't see it, disable zlib.output_compression in your php.ini and it should appear.
+Se continui a non vederlo, disabilita zlib.output_compression nel tuo file php.ini e così dovrebbe apparire.
 </li>
 
 <li id='q3'>
-<p><b>3.</b> <span class='question'>Accented letters are replaced with some strange characters like Ã©.</span></p>
-Don't use UTF-8 with the standard fonts; they expect text encoded in ISO-8859-1 or windows-1252.
-You can use utf8_decode() to perform a conversion to ISO-8859-1:
+<p><b>3.</b> <span class='question'>I caratteri accentati vengono sostituiti da strani caratteri come Ã©.</span></p>
+Non utilizzare la codifica UTF-8. I font standard FPDF utilizzano ISO-8859-1 o windows-1252.
+Vi è la possibilità di effettuare una conversione verso ISO-8859-1 tramite utf8_decode():
 <div class="doc-source">
 <pre><code>$str = utf8_decode($str);</code></pre>
 </div>
-But some characters such as Euro won't be translated correctly. If the iconv extension is available, the
-right way to do it is the following:
+Ma alcuni caratteri, come il simbolo di Euro, non possono essere convertiti correttamente. Se l'estensione
+iconv è disponibile, la via migliore è la seguente:
 <div class="doc-source">
 <pre><code>$str = iconv('UTF-8', 'windows-1252', $str);</code></pre>
 </div>
-In case you need characters outside windows-1252, take a look at tutorial #7 or
-<a href="http://www.fpdf.org/?go=script&amp;id=92" target="_blank">tFPDF</a>.
 </li>
 
 <li id='q4'>
-<p><b>4.</b> <span class='question'>I try to display the Euro symbol but it doesn't work.</span></p>
-The standard fonts have the Euro character at position 128. You can define a constant like this
-for convenience:
+<p><b>4.</b> <span class='question'>Tento di inserire il simbolo dell'Euro ma non funziona.</span></p>
+I font standard hanno il simbolo dell'euro alla posizione 128. Puoi definire per convenienza una costante
+come questa:
 <div class="doc-source">
 <pre><code>define('EURO', chr(128));</code></pre>
 </div>
 </li>
 
 <li id='q5'>
-<p><b>5.</b> <span class='question'>I try to display a variable in the Header method but nothing prints.</span></p>
-You have to use the <code>global</code> keyword to access global variables, for example:
+<p><b>5.</b> <span class='question'>Provo a visualizzare una variabile nel metodo Header, ma non viene stampato nulla.</span></p>
+Devi utilizzare la parola chiave <code>global</code> per accedere alle variabili globali, per esempio:
 <div class="doc-source">
 <pre><code>function Header()
 {
@@ -94,11 +93,9 @@ You have to use the <code>global</code> keyword to access global variables, for 
 
     $this-&gt;SetFont('Arial', 'B', 15);
     $this-&gt;Cell(0, 10, $title, 1, 1, 'C');
-}
-
-$title = 'My title';</code></pre>
+}</code></pre>
 </div>
-Alternatively, you can use an object property:
+In alternativa, puoi utilizzare una proprietà dell'oggetto:
 <div class="doc-source">
 <pre><code>function Header()
 {
@@ -111,42 +108,44 @@ $pdf-&gt;title = 'My title';</code></pre>
 </li>
 
 <li id='q6'>
-<p><b>6.</b> <span class='question'>I have defined the Header and Footer methods in my PDF class but nothing shows.</span></p>
-You have to create an object from the PDF class, not FPDF:
+<p><b>6.</b> <span class='question'>Ho definito i metodi Header e Footer nella mia classe PDF ma non appare nulla.</span></p>
+Devi creare un oggetto dalla classe PDF, non FPDF:
 <div class="doc-source">
 <pre><code>$pdf = new PDF();</code></pre>
 </div>
 </li>
 
 <li id='q7'>
-<p><b>7.</b> <span class='question'>I can't make line breaks work. I put \n in the string printed by MultiCell but it doesn't work.</span></p>
-You have to enclose your string with double quotes, not single ones.
+<p><b>7.</b> <span class='question'>Non riesco a far funzionare le interruzioni di linea. Inserisco i \n nella stringa stampata da MultiCell ma non funziona.</span></p>
+Devi chiudere la stringa tra virgolette, non tra apici singoli.
 </li>
 
 <li id='q8'>
-<p><b>8.</b> <span class='question'>I use jQuery to generate the PDF but it doesn't show.</span></p>
-Don't use an AJAX request to retrieve the PDF.
+<p><b>8.</b> <span class='question'>Per generare il PDF uso jQuery, ma non viene mostrato.</span></p>
+Non usare una richiesta AJAX per recuperare il file PDF.
 </li>
 
 <li id='q9'>
-<p><b>9.</b> <span class='question'>I draw a frame with very precise dimensions, but when printed I notice some differences.</span></p>
-To respect dimensions, select "None" for the Page Scaling setting instead of "Shrink to Printable Area" in the print dialog box.
+<p><b>9.</b> <span class='question'>Ho disegnato un frame di dimensioni molto precise, ma quando viene stampato noto alcune differenze.</span></p>
+Per rispettare le dimensioni, scegli "Nessuno" nel settaggio della scala di stampa al posto di
+"Restringi all'area di stampa" nel box di dialogo della stampa.
 </li>
 
 <li id='q10'>
-<p><b>10.</b> <span class='question'>I'd like to use the whole surface of the page, but when printed I always have some margins. How can I get rid of them?</span></p>
-Printers have physical margins (different depending on the models); it is therefore impossible to remove
-them and print on the whole surface of the paper.
+<p><b>10.</b> <span class='question'>Vorrei utilizzare l'intera superficie della pagina, ma quando stampo restano sempre alcuni margini. Come posso eliminarli?</span></p>
+Tutte le stampanti hanno dei margini fisici (diversi a seconda del modello), ed è quindi impossibile
+rimuoverli e stampare su tutta la superficie della carta.
 </li>
 
 <li id='q11'>
-<p><b>11.</b> <span class='question'>How can I put a background in my PDF?</span></p>
-For a picture, call Image() in the Header() method, before any other output. To set a background color, use Rect().
+<p><b>11.</b> <span class='question'>Come posso impostare uno sfondo nel mio PDF?</span></p>
+Per un'immagine, effettua una chiamata a Image() all'interno del metodo Header(), prima di ogni altro
+output. Per impostare un colore di sfondo usa Rect().
 </li>
 
 <li id='q12'>
-<p><b>12.</b> <span class='question'>How can I set a specific header or footer on the first page?</span></p>
-Just test the page number:
+<p><b>12.</b> <span class='question'>Come posso impostare una specifica intestazione o un piede nella prima pagina?</span></p>
+Semplicemente, testa il numero di pagina:
 <div class="doc-source">
 <pre><code>function Header()
 {
@@ -165,8 +164,8 @@ Just test the page number:
 </li>
 
 <li id='q13'>
-<p><b>13.</b> <span class='question'>I'd like to use extensions provided by different scripts. How can I combine them?</span></p>
-Use an inheritance chain. If you have two classes, say A in a.php:
+<p><b>13.</b> <span class='question'>Vorrei poter utilizzare estensioni rese disponibili tramite diversi script. Come posso combinarle?</span></p>
+Utilizza un'ereditarietà a catena. Se hai due classi, diciamo A in a.php:
 <div class="doc-source">
 <pre><code>require('fpdf.php');
 
@@ -175,7 +174,7 @@ class A extends FPDF
 ...
 }</code></pre>
 </div>
-and B in b.php:
+e B in b.php:
 <div class="doc-source">
 <pre><code>require('fpdf.php');
 
@@ -184,7 +183,7 @@ class B extends FPDF
 ...
 }</code></pre>
 </div>
-then make B extend A:
+poi, effettua B extend A:
 <div class="doc-source">
 <pre><code>require('a.php');
 
@@ -193,7 +192,7 @@ class B extends A
 ...
 }</code></pre>
 </div>
-and make your own class extend B:
+e la tua classe extend B:
 <div class="doc-source">
 <pre><code>require('b.php');
 
@@ -207,14 +206,14 @@ $pdf = new PDF();</code></pre>
 </li>
 
 <li id='q14'>
-<p><b>14.</b> <span class='question'>How can I open the PDF in a new tab?</span></p>
-Just do the same as you would for an HTML page or anything else: add a target="_blank" to your link or form.
+<p><b>14.</b> <span class='question'>Come posso aprire il PDF in una nuova scheda?</span></p>
+Basta fare quanto si fa per una pagina HTML o per altro: aggiungere un target = "_blank" al proprio link o form.
 </li>
 
 <li id='q15'>
-<p><b>15.</b> <span class='question'>How can I send the PDF by email?</span></p>
-As for any other file, but an easy way is to use <a href="http://phpmailer.codeworxtech.com" target="_blank">PHPMailer</a> and
-its in-memory attachment:
+<p><b>15.</b> <span class='question'>Come posso inviare il PDF tramite email?</span></p>
+Come ogni altro file, ma una via semplice è utilizzare <a href="http://phpmailer.codeworxtech.com" target="_blank">PHPMailer</a>
+e il suo sistema di allegati in-memory:
 <div class="doc-source">
 <pre><code>$mail = new PHPMailer();
 ...
@@ -225,46 +224,45 @@ $mail-&gt;Send();</code></pre>
 </li>
 
 <li id='q16'>
-<p><b>16.</b> <span class='question'>What's the limit of the file sizes I can generate with FPDF?</span></p>
-There is no particular limit. There are some constraints, however:
+<p><b>16.</b> <span class='question'>Qual'è il limite delle dimensioni dei file che posso generare con FPDF?</span></p>
+Non c'è un limite particolare. Ci sono comunque alcune restrizioni:
 <br>
 <br>
-- There is usually a maximum memory size allocated to PHP scripts. For very big documents,
-especially with images, the limit may be reached (the file being built in memory). The
-parameter is configured in the php.ini file.
+- La massima dimensione di memoria allocata per gli script PHP è impostata. Per documenti
+molto grandi, specialmetne con immagini, questo limite potrebbe essere raggiunto (il file
+viene generato nella memoria). Questo parametro è configurabile nel file php.ini.
 <br>
 <br>
-- The maximum execution time allocated to scripts defaults to 30 seconds. This limit can of course
-be easily reached. It is configured in php.ini and may be altered dynamically with set_time_limit().
-<br>
-<br>
-You can work around the memory limit with <a href="http://www.fpdf.org/?go=script&amp;id=76" target="_blank">this script</a>.
+- Il tempo massimo di esecuzione è impostato di default a 30 secondi. Questo limite può naturalmente
+essere raggiunto con facilità. E' configurato nel file php.ini e può essere alterato dinamicamente con
+la funzione set_time_limit().
 </li>
 
 <li id='q17'>
-<p><b>17.</b> <span class='question'>Can I modify a PDF with FPDF?</span></p>
-It's possible to import pages from an existing PDF document thanks to the
-<a href="https://www.setasign.com/products/fpdi/about/" target="_blank">FPDI</a> extension.
-Then you can add some content to them.
+<p><b>17.</b> <span class='question'>Posso modificare un PDF con FPDF?</span></p>
+Grazie all'estensione <a href="https://www.setasign.com/products/fpdi/about/" target="_blank">FPDI</a>,
+è possibile importare pagine da un documento PDF preesistente.
+Poi, puoi aggiungere ad esse altro contenuto.
 </li>
 
 <li id='q18'>
-<p><b>18.</b> <span class='question'>I'd like to make a search engine in PHP and index PDF files. Can I do it with FPDF?</span></p>
-No. But a GPL C utility does exist, pdftotext, which is able to extract the textual content from a PDF.
-It's provided with the <a href="http://www.foolabs.com/xpdf/" target="_blank">Xpdf</a> package.
+<p><b>18.</b> <span class='question'>Vorrei creare un motore di ricerca in PHP e indicizzare i file PDF. Posso farlo utilizzando FPDF?</span></p>
+No, ma esiste una utility scritta in C e rilasciata sotto licenza GPL, pdftotext, che consente di estrarre
+il contenuto testuale da un PDF. E' fornita col il pacchetto <a href="http://www.foolabs.com/xpdf/" target="_blank">Xpdf</a>.
 </li>
 
 <li id='q19'>
-<p><b>19.</b> <span class='question'>Can I convert an HTML page to PDF with FPDF?</span></p>
-Not real-world pages. But a GPL C utility does exist, <a href="https://www.msweet.org/projects.php?Z1" target="_blank">HTMLDOC</a>,
-which allows to do it and gives good results.
+<p><b>19.</b> <span class='question'>Posso convertire una pagina HTML in PDF con FPDF?</span></p>
+Non pagine del "mondo reale". No, ma esiste una utility scritta in C e rilasciata sotto licenza GPL,
+<a href="https://www.msweet.org/projects.php?Z1" target="_blank">HTMLDOC</a>, che permette di farlo
+ottenendo buoni risultati.
 </li>
 
 <li id='q20'>
-<p><b>20.</b> <span class='question'>Can I concatenate PDF files with FPDF?</span></p>
-Not directly, but it's possible to use <a href="https://www.setasign.com/products/fpdi/demos/concatenate-fake/" target="_blank">FPDI</a>
-to perform that task. Some free command-line tools also exist:
-<a href="https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/" target="_blank">pdftk</a> and
+<p><b>20.</b> <span class='question'>Posso concatenare files PDF con FPDF?</span></p>
+Non direttamente, ma è possibile utilizzare <a href="https://www.setasign.com/products/fpdi/demos/concatenate-fake/" target="_blank">FPDI</a>
+per raggiungere tale obiettivo. Esistono anche alcuni tools liberi a linea di comando:
+<a href="https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/" target="_blank">pdftk</a> e
 <a href="http://thierry.schmit.free.fr/spip/spip.php?article15" target="_blank">mbtPdfAsm</a>.
 </li>
 </ul>

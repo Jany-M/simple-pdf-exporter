@@ -4,7 +4,7 @@
  * PDFMerger
  *
  *
- * @author 		Dualcube
+ * @author 		Shambix
  * @package 	Class/
  * @version    0.0.1
  */

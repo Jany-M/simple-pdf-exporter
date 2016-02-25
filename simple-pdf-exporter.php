@@ -3,8 +3,8 @@
  * Plugin Name: Simple PDF Exporter
  * Plugin URI: https://github.com/Seravo/wp-pdf-templates
  * Description: This plugin utilises the DOMPDF Library to provide a URL endpoint e.g. /my-post/pdf/ that generates a downloadable PDF file.
- * Version: 1.4
- * Author: Jany Martelli
+ * Version: 1.5
+ * Author: Shambix
  * Author URI: http://www.shambix.com
  * License: GPLv3
 */

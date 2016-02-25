@@ -12,7 +12,7 @@ function pdf_export(){
     
     if ($pdf_export_check == 'pdf') {
 
-        if (isset($_REQUEST['force']) || !file_exists($final_pdf) || date("dMY-H", filemtime($final_pdf)) != date('dMY-H')) {
+        if (isset($_REQUEST['force']) || !file_exists($final_pdf) || date("dMY", filemtime($final_pdf)) != date('dMY')) {
 
             require_once(PDF_PROCESS."create_pagenumber_merge.php");
             require_once(PDF_PROCESS."index_page.php");

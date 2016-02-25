@@ -20,7 +20,7 @@ require_once(PDF_LIBS."pageno/pdfnumber.php");
 require_once(PDF_LIBS."pageno/pageno.php");
 require_once(PDF_LIBS."pdfmerger/pdfmerger.php");
 
-$posts_per_page = 1;
+$posts_per_page = -1;
 
 /* -------------------------------------------------------------------------------- 
 *
@@ -52,7 +52,7 @@ $dompdf_settings = array(
 
 global $pdf_export_post_type, $pdf_export_all_posts, $pdf_export_css_file, $pdf_html;
 
-$pdf_html = true;
+$pdf_html = false;
 if($pdf_html == true) {
 	if (!is_dir(PDF_EXPORT_HTML) || !file_exists(PDF_EXPORT_HTML)) {
 		mkdir(PDF_EXPORT_HTML, 0777, true);
