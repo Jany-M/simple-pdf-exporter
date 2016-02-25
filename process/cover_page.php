@@ -8,14 +8,21 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
 ini_set("error_log", "/var/log/php-fpm/pdf-gen.log");*/
 
 function get_html_cover_page() {
-    global $pdf_export_css_file;
+    global $pdf_export_css_file, $pdf_export_post_type;
+
+    if($pdf_export_post_type != 'rate-plan') {
+        $division = strtoupper(str_replace('rate-plan-', '', $pdf_export_post_type));
+    } else {
+        $division = 'Global';
+    }
+
     ob_start();
 
     echo '<link rel="stylesheet" href="'.$pdf_export_css_file.'" type="text/css" media="print" />';
 
                 echo '<table class="cover_page" width="100%" >';
                 echo '<tr><th colspan="3" align="center" style="height:300px;" >&nbsp;</th></tr>';
-                echo '<tr><th colspan="3" align="center" style="color:#4791FF; font-size:22px; font-family:Arial, sans-serif;"><div style="border-bottom: 2px solid #1975D1;"><div style="padding-left:25px; padding-right:25px; padding-bottom:25px;  text-align:center; font-family:Arial, sans-serif;">Starwood EAME Rate Loading Guidelines</div></div><br/><div style="text-align:center; font-family:Arial, sans-serif;">Updated '.@date('jS F Y').'</div></th></tr>';
+                echo '<tr><th colspan="3" align="center" style="color:#4791FF; font-size:22px; font-family:Arial, sans-serif;"><div style="border-bottom: 2px solid #1975D1;"><div style="padding-left:25px; padding-right:25px; padding-bottom:25px;  text-align:center; font-family:Arial, sans-serif;">Starwood '.$division.' Rate Loading Guidelines</div></div><br/><div style="text-align:center; font-family:Arial, sans-serif;">Updated '.@date('jS F Y').'</div></th></tr>';
                 echo '<tr><td colspan="3" style="height:100px;">&nbsp;</td></tr>';
                 echo '<tr><th colspan="3" >Proprietary Confidential - Only for Internal use</th></tr>';
                 echo '</table>';
