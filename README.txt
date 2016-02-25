@@ -6,7 +6,7 @@ Tested up to: 4.4.1
 Stable tag: trunk
 Author: Shambix
 Author URI: http://www.shambix.com
-Plugin URI: https://github.com/Seravo/wp-pdf-templates
+Plugin URI: https://github.com/Jany-M/simple-pdf-exporter
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
