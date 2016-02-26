@@ -20,8 +20,7 @@ require_once(PDF_LIBS."pageno/pdfnumber.php");
 require_once(PDF_LIBS."pageno/pageno.php");
 require_once(PDF_LIBS."pdfmerger/pdfmerger.php");
 
-global $posts_per_page;
-$posts_per_page = -1;
+global $posts_per_page, $pdf_export_post_type, $pdf_export_all_posts, $pdf_export_css_file, $pdf_html, $pdf_export_force, $pdf_export_cache;
 
 /* -------------------------------------------------------------------------------- 
 *
@@ -51,16 +50,19 @@ $dompdf_settings = array(
 *
 -------------------------------------------------------------------------------- */
 
-global $pdf_export_post_type, $pdf_export_all_posts, $pdf_export_css_file, $pdf_html;
-
+$posts_per_page = -1;
+$pdf_export_cache = true;
 $pdf_html = false;
-if($pdf_html == true) {
+
+if($pdf_html === true) {
 	if (!is_dir(PDF_EXPORT_HTML) || !file_exists(PDF_EXPORT_HTML)) {
 		mkdir(PDF_EXPORT_HTML, 0777, true);
 	}
 }
+
 $pdf_export_all_posts = 'all_posts.pdf';
-$pdf_export_css = get_stylesheet_directory_uri().'/pdf.css';
+
+$pdf_export_css = get_stylesheet_directory_uri().'/assets/css/pdf.css';
 if(!file_exists($pdf_export_css)) {
 	$pdf_export_css_file = get_bloginfo('url').'/wp-content/plugins/simple-pdf-exporter/assets/pdf_export.css';
 }

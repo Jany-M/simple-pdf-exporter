@@ -9,7 +9,7 @@ ini_set("error_log", "/var/log/php-fpm/pdf-gen.log");*/
 
 function create_pagenumber_merge() {
 
-	global $pdf_export_post_type, $posts_per_page, $pdf_export_all_posts, $dompdf_settings, $pdf_html;
+	global $pdf_export_post_type, $posts_per_page, $pdf_export_all_posts, $dompdf_settings, $pdf_html, $pdf_export_force, $pdf_export_cache;
 
 	// Merge Settings
 	$pdf2 = new PAGENO;
@@ -46,10 +46,11 @@ function create_pagenumber_merge() {
 		return $pagecount;
 	}
 
-
 	// Check for Cached Posts
-	//delete_transient('simple_pdf_export_posts');
-	//if(get_transient('simple_pdf_export_posts') === false) {
+	if($pdf_export_force = true || $pdf_export_cache = false)
+		delete_transient('simple_pdf_export_posts');
+
+	if(get_transient('simple_pdf_export_posts') === false) {
 
 		// The Query
 		$pdf_query_args = array(
@@ -62,16 +63,16 @@ function create_pagenumber_merge() {
 		$pdf_query = new WP_Query( $pdf_query_args );
 		//Cache Results
 		set_transient('simple_pdf_export_posts', $pdf_query, 23 * HOUR_IN_SECONDS );
-	//}
+	}
 
 	$pdf_query = get_transient('simple_pdf_export_posts');
 
 	// Get the Posts
-	if ( $pdf_query->have_posts() ) : while ( $pdf_query->have_posts() ) : $pdf_query->the_post(); 
+	if ($pdf_query->have_posts()) : while ($pdf_query->have_posts()) : $pdf_query->the_post(); 
 			
-		//$file_to_save = PDF_EXPORT_FILES.$post->ID.'-'.date('dMY-H').'.pdf';
 		$file_to_save = PDF_EXPORT_FILES.$post->ID.'.pdf';
-		//if (!file_exists(PDF_EXPORT_FILES.$file_to_save)) {
+		
+		if ($pdf_export_force = true || $pdf_export_cache = false || !file_exists($file_to_save) || date("dMY-H", filemtime($file_to_save)) != date('dMY-H')) {
 
 			$html = get_all_rate_plan($post->ID,$term);
 			$file_to_save_temp = $file_to_save.'.temp';
@@ -83,16 +84,7 @@ function create_pagenumber_merge() {
 				$txt = $html;
 				fwrite($myfile, $txt);			
 				fclose($myfile);
-			}
-
-			/*$version = '';
-			$header = '';
-			$title = '';
-			$header_html = '';
-			$footer_html = '';
-			$report_type_text = '';
-			$report_period_text = '';		
-			$front_page_html = '';*/		
+			}	
 			
 			// DOMPDF	
 			$dompdf = new DOMPDF(array($dompdf_settings));
@@ -105,14 +97,14 @@ function create_pagenumber_merge() {
 			//save final pdf with page number
 			$page_offset += add_page_no($file_to_save_temp, $file_to_save, $page_offset);
 			unlink($file_to_save_temp);
-
-			// Merger Stuff
-			update_post_meta($post->ID, 'pdf_page_no', $pno);
-			$pdf->addPDF($file_to_save, 'all');
-			$pagecount = $pdf2->setSourceFile($file_to_save);
-			$pno += $pagecount;
-
-		//}
+		
+		}
+		
+		// Merger Stuff
+		update_post_meta($post->ID, 'pdf_page_no', $pno);
+		$pdf->addPDF($file_to_save, 'all');
+		$pagecount = $pdf2->setSourceFile($file_to_save);
+		$pno += $pagecount;
 
 	endwhile;  wp_reset_postdata();  endif;	
 
