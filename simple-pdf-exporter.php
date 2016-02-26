@@ -3,13 +3,13 @@
  * Plugin Name: Simple PDF Exporter
  * Plugin URI: https://github.com/Seravo/wp-pdf-templates
  * Description: This plugin utilises the DOMPDF Library to provide a URL endpoint e.g. /my-post/pdf/ that generates a downloadable PDF file.
- * Version: 1.5
+ * Version: 1.6
  * Author: Shambix
  * Author URI: http://www.shambix.com
  * License: GPLv3
 */
 
-define('SIMPLE_PDF_EXPORT_VERSION', '1.5');
+define('SIMPLE_PDF_EXPORT_VERSION', '1.6');
 //define('DISABLE_PDF_CACHE', true);
 
 /*ini_set('display_errors', 1);
@@ -72,9 +72,6 @@ error_reporting(E_ERROR | E_PARSE);*/
             }
 
             public static function activate() {
-                // Add 24h cron job to WP
-                wp_schedule_event(time(), 'daily', 'pdf_export_cronjob_every_24h');
-
                 // copy DOMPDF fonts to wp-content/dompdf-fonts/
                 /*if(!file_exists(DOMPDF_FONT_DIR.'dompdf_font_family_cache.dist.php')) {
                     copy(PDF_LIBS.'dompdf/lib/fonts/dompdf_font_family_cache.dist.php', DOMPDF_FONT_DIR.'dompdf_font_family_cache.dist.php');
@@ -82,9 +79,6 @@ error_reporting(E_ERROR | E_PARSE);*/
             }
 
             public static function deactivate() {
-                // Remove cronjob
-                wp_clear_scheduled_hook('pdf_export_cronjob_every_24h');
-
                 // Remove directories created by this plugin in wp-content
                 function rrmdir($dir) {
                     foreach(glob($dir . '/*') as $file) {
@@ -119,22 +113,6 @@ error_reporting(E_ERROR | E_PARSE);*/
         $simple_pdf_export = new SIMPLE_PDF_EXPORT();
 
         if(isset($wp_plugin_template))  {
-            // Add the action link to Plugin, in plugins page
-            /*function plugin_settings_link($links) {
-                $settings_link = '<a href="options-general.php?page=simple_pdf_export_settings">Settings</a>';
-                array_unshift($links, $settings_link);
-                return $links;
-            }
-            $plugin = plugin_basename(__FILE__);
-            add_filter("plugin_action_links_$plugin", 'plugin_settings_link');*/
-        }
-
-        // Add 24h cron job to WP (in case it gets deleted but plugin doesnt get re-activated)
-        function pdf_export_daily() {
-            wp_schedule_event(time(), 'daily', 'pdf_export_cronjob_every_24h');
-        }
-        if (!wp_next_scheduled( 'pdf_export_cronjob_every_24h' ) ) {
-            add_action('pdf_export_cronjob_every_24h', 'pdf_export');
         }
 
     }

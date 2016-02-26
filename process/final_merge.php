@@ -16,7 +16,7 @@ function final_merge() {
     $newpdfpathnamecover = PDF_EXPORT.'cover_page.pdf';
     $newpdfpathnameindex = PDF_EXPORT.'index_page.pdf';
 
-    $newpdfpathnamefinal = PDF_EXPORT.$pdf_export_post_type.'_pricing_guidelines-'.date('dMY').'.pdf';
+    $newpdfpathnamefinal = PDF_EXPORT.$pdf_export_post_type.'_export-'.date('dMY').'.pdf';
 
     $pdf->addPDF($newpdfpathnamecover, 'all');
     $pdf->addPDF($newpdfpathnameindex, 'all');

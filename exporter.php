@@ -6,9 +6,9 @@ global $pdf_export_post_type;
 function pdf_export(){
     
     global $pdf_export_post_type;
-    $pdf_export_post_type = isset($_REQUEST['post_type']) ? $_REQUEST['post_type'] : 'rate-plan';
+    $pdf_export_post_type = isset($_REQUEST['post_type']) ? $_REQUEST['post_type'] : 'post';
     $pdf_export_check = isset($_REQUEST['export']) ? $_REQUEST['export'] : '';
-    $final_pdf = PDF_EXPORT.$pdf_export_post_type.'_pricing_guidelines-'.date('dMY').'.pdf';
+    $final_pdf = PDF_EXPORT.$pdf_export_post_type.'_export-'.date('dMY').'.pdf';
     
     if ($pdf_export_check == 'pdf') {
 
@@ -26,8 +26,8 @@ function pdf_export(){
 
         }
         
-        $final_pdf = PDF_EXPORT.$pdf_export_post_type.'_pricing_guidelines-'.date('dMY').'.pdf';
-        $filename = $pdf_export_post_type.'_pricing_guidelines-'.date('dMY').'.pdf';
+        $final_pdf = PDF_EXPORT.$pdf_export_post_type.'_export-'.date('dMY').'.pdf';
+        $filename = $pdf_export_post_type.'_export-'.date('dMY').'.pdf';
         header('Content-type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
         header('Content-Transfer-Encoding: binary');
