@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Simple PDF Exporter
- * Plugin URI: https://github.com/Seravo/wp-pdf-templates
- * Description: This plugin utilises the DOMPDF Library to provide a URL endpoint e.g. /my-post/pdf/ that generates a downloadable PDF file.
+ * Plugin URI: https://github.com/Jany-M/simple-pdf-exporter/
+ * Description: This plugin uses the DOMPDF Library to generate PDFs for whole post types, with cover and index page. 
  * Version: 1.6
  * Author: Shambix
  * Author URI: http://www.shambix.com
