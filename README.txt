@@ -1,6 +1,6 @@
 === Simple PDF Exporter ===
 
-Contributors: dukessa, Shambix, Jany-M
+Contributors: dukessa, Shambix
 Tags: pdf, dompdf, exporter, export, custom post types
 Requires at least: 4
 Tested up to: 4.4.1
@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-This plugin uses the DOMPDF Library to generate PDFs for whole post types, with cover and index page.
+This plugin uses the DOMPDF Library to generate PDFs for whole post types, with index page.
 There might be a Pro version with more options, check back in a while or email me at infoATshambix.com if you want a custom version of it, for a fee.
 
 The plugin checks if a pdf already exists with the same date (ddMonyear), if yes, the existing pdf will be served, otherwise a new will be generated. Since the PDF generation uses up a lot of resources, this will prevent too many runs of the plugin and the crashing of your server.

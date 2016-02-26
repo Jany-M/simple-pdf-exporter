@@ -17,12 +17,10 @@ function pdf_export(){
 
             require_once(PDF_PROCESS."create_pagenumber_merge.php");
             require_once(PDF_PROCESS."index_page.php");
-            require_once(PDF_PROCESS."cover_page.php");
             require_once(PDF_PROCESS."final_merge.php");
 
             create_pagenumber_merge();
             index_page();
-            cover_page();
             final_merge();
 
         }

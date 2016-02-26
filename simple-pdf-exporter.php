@@ -2,15 +2,12 @@
 /**
  * Plugin Name: Simple PDF Exporter
  * Plugin URI: https://github.com/Jany-M/simple-pdf-exporter/
- * Description: This plugin uses the DOMPDF Library to generate PDFs for whole post types, with cover and index page. 
- * Version: 1.6
+ * Description: This plugin uses the DOMPDF Library to generate PDFs for whole post types, with index page. 
+ * Version: 1.6.5
  * Author: Shambix
  * Author URI: http://www.shambix.com
  * License: GPLv3
 */
-
-define('SIMPLE_PDF_EXPORT_VERSION', '1.6');
-//define('DISABLE_PDF_CACHE', true);
 
 /*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
