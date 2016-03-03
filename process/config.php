@@ -1,13 +1,28 @@
 <?php
 
+/*ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ERROR | E_PARSE);*/
+
 /* -------------------------------------------------------------------------------- 
 *
 * CUSTOM VARS & SETUP
 *
 -------------------------------------------------------------------------------- */
 
-$wp_path = explode('wp-content', dirname(__FILE__));
-require_once($wp_path[0].'wp-load.php');
+global  $pdf_posts_per_page, 
+		$pdf_export_post_type,
+		$pdf_export_css_file,
+		$pdf_export_force;
+
+if(!file_exists(PDF_EXPORT_CSS_FILE))
+	$pdf_export_css_file = esc_url(plugins_url('assets/pdf_export.css', dirname(__FILE__)));
+
+/* -------------------------------------------------------------------------------- 
+*
+* INCLUDES
+*
+-------------------------------------------------------------------------------- */
 
 require_once PDF_LIBS.'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
@@ -16,11 +31,11 @@ require_once(PDF_PROCESS.'pdf_layout.php');
 require_once(PDF_LIBS."fpdf/fpdf.php");
 require_once(PDF_LIBS."fpdi/fpdi.php");
 require_once(PDF_LIBS."fpdi_addon/annots.php");
-require_once(PDF_LIBS."pageno/pdfnumber.php");
-require_once(PDF_LIBS."pageno/pageno.php");
+if (PDF_EXPORT_PAGINATION ) {
+	require_once(PDF_LIBS."pageno/pdfnumber.php");
+	require_once(PDF_LIBS."pageno/pageno.php");
+}
 require_once(PDF_LIBS."pdfmerger/pdfmerger.php");
-
-global $posts_per_page, $pdf_export_post_type, $pdf_export_all_posts, $pdf_export_css_file, $pdf_html, $pdf_export_force, $pdf_export_cache;
 
 /* -------------------------------------------------------------------------------- 
 *
@@ -28,13 +43,13 @@ global $posts_per_page, $pdf_export_post_type, $pdf_export_all_posts, $pdf_expor
 *
 -------------------------------------------------------------------------------- */
 
-global $dompdf_settings;
+//global $dompdf_settings;
 
 /*set_base_path(get_stylesheet_directory_uri());
 $this->setFontDir($this->chroot . "/lib/fonts");
 $this->setFontCache($this->getFontDir());*/
 
-$dompdf_settings = array(
+/*$dompdf_settings = array(
 	'enable_font_subsetting' => true,
 	'default_media_type' => 'print',
 	'default_paper_size' => 'A4',
@@ -42,27 +57,4 @@ $dompdf_settings = array(
 	'enable_remote' => true,
 	'dpi' => 72,
 	//'enable_html5_parser' => 1, // not working well
-);
-
-/* -------------------------------------------------------------------------------- 
-*
-* VARIOUS
-*
--------------------------------------------------------------------------------- */
-
-$posts_per_page = -1;
-$pdf_export_cache = true;
-$pdf_html = false;
-
-if($pdf_html === true) {
-	if (!is_dir(PDF_EXPORT_HTML) || !file_exists(PDF_EXPORT_HTML)) {
-		mkdir(PDF_EXPORT_HTML, 0777, true);
-	}
-}
-
-$pdf_export_all_posts = 'all_posts.pdf';
-
-$pdf_export_css = get_stylesheet_directory_uri().'/assets/css/pdf.css';
-if(!file_exists($pdf_export_css)) {
-	$pdf_export_css_file = get_bloginfo('url').'/wp-content/plugins/simple-pdf-exporter/assets/pdf_export.css';
-}
+);*/

@@ -1,27 +1,33 @@
 === Simple PDF Exporter ===
 
 Contributors: dukessa, Shambix
-Tags: pdf, dompdf, exporter, export, custom post types
+Tags: pdf, dompdf, exporter, export, custom post types, export pdf, pdf collection, create pdf
 Requires at least: 4
 Tested up to: 4.4.1
 Stable tag: trunk
 Author: Shambix
 Author URI: http://www.shambix.com
-Plugin URI: https://github.com/Jany-M/simple-pdf-exporter
+Plugin URI: https://wordpress.org/plugins/simple-pdf-exporter/
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-This plugin uses the DOMPDF Library to generate PDFs for whole post types, with index page.
-There might be a Pro version with more options, check back in a while or email me at infoATshambix.com if you want a custom version of it, for a fee.
+Export a single PDF with all posts, or custom post types.
+
+> ** IMPORTANT ** This plugin requires at least 512MB of free RAM available, or it will timeout / return an error).
+
+= The Basics ==
 
 The plugin checks if a pdf already exists with the same date (ddMonyear), if yes, the existing pdf will be served, otherwise a new will be generated. Since the PDF generation uses up a lot of resources, this will prevent too many runs of the plugin and the crashing of your server.
 Check the example below or the FAQ for ways to force the PDF generation anyway.
 
-Depending on how many posts you have, it might take from a few seconds to several minutes for a new PDF to be generated.
+** Depending on how many posts you have, it might take from a few seconds to several minutes for a new PDF to be generated. **
 
-"If no PDF is generated you probably don't have enough server resources. This can't be fixed, as PDF libraries are very resource-hungry. Ask your hosting to check how many resources you would need to run the plugin and if there is anything you can do, within your hosting limits, to make sure the plugin has enough or appropriate RAM/PHP settings."
+> If no PDF is generated you probably don't have enough server resources. ** This can't be fixed, as PDF libraries are very resource-hungry. **
+Ask your hosting to check how many resources you would need to run the plugin and if there is anything you can do, within your hosting limits, to make sure the plugin has enough or appropriate RAM/PHP settings.
+
+If you don't use a custom url, hence you don't add the `post_type` parameter to the url, the default post type exported will always be WP default `post`.
 
 You can add a frontend link or button on your frontend and customize it, like in this example for Twitter Bootstrap:
 
@@ -44,13 +50,19 @@ if( function_exists('pdf_export')) { ?>
 	</ul>
 <?php } ?>`
 
-"If you don't use a custom url, hence you don't add the `post_type` parameter to the url, the default post type exported will always be WP default `post`."
+= The PDF Template =
 
-Currently, the template for the each exported post is very basic (and a table, since floating doesn't play nicely with the DOMPDF library), feel free to edit it here `wp-content/plugins/simple-pdf-exporter/process/pdf_layout.php`
+Currently, the template for the each exported post is very basic (and a table, since floating doesn't play nicely with the DOMPDF library), feel free to edit it here `wp-content/plugins/simple-pdf-exporter/process/pdf_layout.php`, **only if you know what you are doing**.
 Your layout must be echoed in php. eg. `echo '<div>the content goes here</div>';` or it won't show up in the PDF.
 
 You can use a custom CSS to customize the layout.
 Create a pdf.css in your theme folder, otherwise the plugin's default (and really basic) CSS will be used (you can find it here `wp-content/plugins/simple-pdf-exporter/assets/pdf_export.css`)
+
+= Questions? =
+
+Check the FAQ before opening new threads in the forum!
+
+> Contact me if you want a **custom version of the plugin**, for a fee (contact form at [shambix.com](http://www.shambix.com)).
 
 = Libraries & Credits =
 
@@ -70,27 +82,54 @@ Create a pdf.css in your theme folder, otherwise the plugin's default (and reall
 In order to export a pdf, you can do it from backend from Tools -> PDF Export or enter `http://yoursite.com/?export=pdf` in your browser.
 You can also make the url into a link or button on your site, to use on frontend.
 
+= I want to limit the amount of posts =
+Use `&num=x` after your url
+eg. `http://yoursite.com/?export=pdf&num=3`
+
 = I want to create a PDF from a custom post type =
-Use `&post_type=your-post-type-slug`
+Use `&post_type=x`
 eg. `http://yoursite.com/?export=pdf&post_type=your-post-type-slug`
 
 = How do I customize the layout of the posts in the pdf? =
-For now, you need to change the file pdf_layout.php inside the plugin folder `wp-content/plugins/simple-pdf-exporter/process/pdf_layout.php`
+You need to change the file `pdf_layout.php` inside the plugin folder `wp-content/plugins/simple-pdf-exporter/process/pdf_layout.php`
 Your layout must be echoed in php. eg. `echo '<div>the content goes here</div>';` or it won't show up in the PDF.
 
-= I want to override the cache / generate a new pdf no matter what =
-Use &force after your url
+= I want to override the existing file / generate a new pdf no matter what =
+Use `&force` after your url
 eg. `http://yoursite.com/?export=pdf&force`
 
 = Can I use a custom CSS file? =
-Yes.
 You can use a custom CSS to customize the layout.
-Create a pdf.css in your theme folder, otherwise the plugin's default (and really basic) CSS will be used (you can find it here `wp-content/plugins/simple-pdf-exporter/assets/pdf_export.css`)
+Create a file named pdf_export.css in your theme folder, otherwise the plugin's default (and really basic) CSS will be used (you can find it here `wp-content/plugins/simple-pdf-exporter/assets/pdf_export.css`)
+
+= Is there some other option I can change? =
+Yes there's a few. In order to change them, add them to your `wp-config.php` file.
+eg. define('PDF_EXPORT_PAGINATION', true);
+
+Here's the full list and what they are set to, by default:
+
+* define('PDF_EXPORT_PAGINATION', false);
+* define('PDF_EXPORT_HTML_OUTPUT', false);
+* define('PDF_EXPORT_CSS_FILE', get_stylesheet_directory_uri().'/pdf_export.css');
+* define('DOMPDF_PAPER_SIZE', 'A4');
+* define('DOMPDF_PAPER_ORIENTATION', 'portrait');
+* define('DOMPDF_DPI', 72);
+* define('DOMPDF_ENABLE_REMOTE', true);
+* define('DOMPDF_ENABLE_HTML5', false);
+* define('DOMPDF_ENABLE_FONTSUBSETTING', true);
+* define('DOMPDF_MEDIATYPE', 'print');
+* define('DOMPDF_FONTHEIGHTRATIO', 1);
 
 
 == Changelog ==
 
-= 1.5 (25 feb 2015) =
+= 1.7 (3 mar 2016) =
+* Cleaned up everything
+* Added constants i/o vars
+* Added more options
+* Simplified process
+
+= 1.5 (25 feb 2016) =
 * Updated DOMPDF 0.7
 * Updated FPDF 1.81
 * Updated FPDI 1.6.1
@@ -107,5 +146,5 @@ Create a pdf.css in your theme folder, otherwise the plugin's default (and reall
 * Added custom css file, as well as pre-made one (instead of inline css)
 * Merged posts pdf creation with page number and posts merge
 
-= 1.0 (23 feb 2015) =
+= 1.0 (23 feb 2016) =
 * Initial release on Github 
