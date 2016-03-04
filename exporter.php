@@ -1,6 +1,6 @@
 <?php
 
-function pdf_export(){
+function simple_pdf_export_process(){
 
     /*ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -15,13 +15,13 @@ function pdf_export(){
     $pdf_export_check = isset($_REQUEST['export']) ? $_REQUEST['export'] : '';
     $pdf_export_force = isset($_REQUEST['force']);
 
-    $final_pdf = PDF_EXPORT.$pdf_export_post_type.'_export-'.date('dMY').'.pdf';
+    $final_pdf = SIMPLE_PDF_EXPORTER_EXPORT.$pdf_export_post_type.'_export-'.date('dMY').'.pdf';
     
     if ($pdf_export_check == 'pdf') {
 
          if ($pdf_export_force || !file_exists($final_pdf) || date("dMY", filemtime($final_pdf)) != date('dMY')) {
 
-            require_once(PDF_PROCESS."create_pagenumber_merge.php");
+            require_once(SIMPLE_PDF_EXPORTER_PROCESS."create_pagenumber_merge.php");
             create_pagenumber_merge();
         }
         

@@ -1,22 +1,18 @@
 <?php
-require_once(PDF_PROCESS.'config.php');
+require_once(SIMPLE_PDF_EXPORTER_PROCESS.'config.php');
 use Dompdf\Dompdf;
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ERROR | E_PARSE);
 
 function create_pagenumber_merge() {
 
-	global $wp_query, $pdf_export_post_type, $pdf_posts_per_page, /*$dompdf_settings, */$pdf_export_force;
+	global $wp_query, $pdf_export_post_type, $pdf_posts_per_page, $pdf_export_force;
 
-	$newpdfpathname = PDF_EXPORT.$pdf_export_post_type.'_export-'.date('dMY').'.pdf';
+	$newpdfpathname = SIMPLE_PDF_EXPORTER_EXPORT.$pdf_export_post_type.'_export-'.date('dMY').'.pdf';
 
 	// Merge Settings
 	$pdf = new DC_Rate_Plan_Pdf_All_PDFMerger;
 
 	// Page Number Settings
-	if(PDF_EXPORT_PAGINATION) {
+	if(SIMPLE_PDF_EXPORTER_PAGINATION) {
 		$pdf2 = new PAGENO;
 		$pno = 1;
 		$page_offset = 0;
@@ -74,7 +70,7 @@ function create_pagenumber_merge() {
 		
 		$post_id = get_the_ID();
 
-		$file_to_save = PDF_EXPORT_FILES.$post_id.'.pdf';
+		$file_to_save = SIMPLE_PDF_EXPORTER_FILES.$post_id.'.pdf';
 		
 		if ($pdf_export_force = true || !file_exists($file_to_save) || date("dMY-H", filemtime($file_to_save)) != date('dMY-H')) {
 
@@ -99,7 +95,7 @@ function create_pagenumber_merge() {
 			$dompdf->render();
 
 
-			if(PDF_EXPORT_PAGINATION) {
+			if(SIMPLE_PDF_EXPORTER_PAGINATION) {
 				$file_to_save_temp = $file_to_save.'.temp';
 				//save the temporary pdf file on the server
 				file_put_contents($file_to_save_temp, $dompdf->output());
@@ -113,8 +109,8 @@ function create_pagenumber_merge() {
 			}
 
 			// WRITE TO HTML FILES - DEBUG ONLY
-			if(PDF_EXPORT_HTML_OUTPUT) {
-				$file_to_save2 = PDF_EXPORT_HTML.$post_id.'.html';
+			if(SIMPLE_PDF_EXPORTER_HTML_OUTPUT) {
+				$file_to_save2 = SIMPLE_PDF_EXPORTER_HTML.$post_id.'.html';
 				$myfile = fopen($file_to_save2, "w") or die("Unable to open file!");
 				$txt = $html;
 				fwrite($myfile, $txt);			
@@ -123,7 +119,7 @@ function create_pagenumber_merge() {
 	
 		}
 
-		if(PDF_EXPORT_PAGINATION) {
+		if(SIMPLE_PDF_EXPORTER_PAGINATION) {
 			// Pagination Stuff
 			update_post_meta($post_id, 'pdf_export_page_no', $pno);
 			$pagecount = $pdf2->setSourceFile($file_to_save);

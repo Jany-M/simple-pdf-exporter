@@ -1,6 +1,6 @@
 <?php 
 
-if(!function_exists(create_pdf_layout)) {
+if(!function_exists('create_pdf_layout')) {
 
 	function create_pdf_layout($post, $term ) {
 		global $post, $pdf_export_css_file;

@@ -60,15 +60,6 @@ if(!class_exists('SIMPLE_PDF_EXPORT_SETTINGS')) {
                 <p><strong>Remember that if you don't have at least 512MB of RAM, on this server, the export will fail.</strong></p>
                 <a class="ccsve_button button button-success" href="?export=pdf&force">Export to PDF</a>
 
-                <br/>
-                <br/>
-                <br/>
-
-                <p>Sorry there's no options here!<br />
-                I developed this plugin for a client of mine, and already worked several extra hours, just so <strong>you</strong> could use it for free :) <br />
-                Support is limited due to lack of time, but if you need a <strong>custom version</strong> of this plugin, just <a href="hhtp://www.shambix.com/#contact" target="_blank">contact me</a>!
-                </p>
-
           </div>
         <?php
         } // END public function plugin_settings_page()

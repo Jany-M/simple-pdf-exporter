@@ -104,13 +104,13 @@ Create a file named pdf_export.css in your theme folder, otherwise the plugin's 
 
 = Is there some other option I can change? =
 Yes there's a few. In order to change them, add them to your `wp-config.php` file.
-eg. define('PDF_EXPORT_PAGINATION', true);
+eg. define(SIMPLE_PDF_EXPORTER_PAGINATION', true);
 
 Here's the full list and what they are set to, by default:
 
-* define('PDF_EXPORT_PAGINATION', false);
-* define('PDF_EXPORT_HTML_OUTPUT', false);
-* define('PDF_EXPORT_CSS_FILE', get_stylesheet_directory_uri().'/pdf_export.css');
+* define(SIMPLE_PDF_EXPORTER_PAGINATION', false);
+* define(SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
+* define(SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory_uri().'/pdf_export.css');
 * define('DOMPDF_PAPER_SIZE', 'A4');
 * define('DOMPDF_PAPER_ORIENTATION', 'portrait');
 * define('DOMPDF_DPI', 72);
