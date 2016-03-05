@@ -20,15 +20,15 @@ if(!file_exists(SIMPLE_PDF_EXPORTER_CSS_FILE))
 *
 -------------------------------------------------------------------------------- */
 
-require_once SIMPLE_PDF_EXPORTER_LIBS.'dompdf/autoload.inc.php';
+require_once SIMPLE_PDF_EXPORTER_PLUGIN.'libs/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 
-require_once(SIMPLE_PDF_EXPORTER_PROCESS.'pdf_layout.php');
-require_once(SIMPLE_PDF_EXPORTER_LIBS."fpdf/fpdf.php");
-require_once(SIMPLE_PDF_EXPORTER_LIBS."fpdi/fpdi.php");
-require_once(SIMPLE_PDF_EXPORTER_LIBS."fpdi_addon/annots.php");
+require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/pdf_layout.php');
+require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/fpdf/fpdf.php');
+require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/fpdi/fpdi.php');
+require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/fpdi_addon/annots.php');
 if (SIMPLE_PDF_EXPORTER_PAGINATION ) {
-	require_once(SIMPLE_PDF_EXPORTER_LIBS."pageno/pdfnumber.php");
-	require_once(SIMPLE_PDF_EXPORTER_LIBS."pageno/pageno.php");
+	require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/pageno/pdfnumber.php');
+	require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/pageno/pageno.php');
 }
-require_once(SIMPLE_PDF_EXPORTER_LIBS."pdfmerger/pdfmerger.php");
+require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/pdfmerger/pdfmerger.php');

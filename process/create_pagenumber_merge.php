@@ -70,7 +70,7 @@ function create_pagenumber_merge() {
 		
 		$post_id = get_the_ID();
 
-		$file_to_save = SIMPLE_PDF_EXPORTER_FILES.$post_id.'.pdf';
+		$file_to_save = SIMPLE_PDF_EXPORTER_EXPORT.'pdf/'.$post_id.'.pdf';
 		
 		if ($pdf_export_force = true || !file_exists($file_to_save) || date("dMY-H", filemtime($file_to_save)) != date('dMY-H')) {
 
@@ -110,7 +110,7 @@ function create_pagenumber_merge() {
 
 			// WRITE TO HTML FILES - DEBUG ONLY
 			if(SIMPLE_PDF_EXPORTER_HTML_OUTPUT) {
-				$file_to_save2 = SIMPLE_PDF_EXPORTER_HTML.$post_id.'.html';
+				$file_to_save2 = SIMPLE_PDF_EXPORTER_EXPORT.'html/'.$post_id.'.html';
 				$myfile = fopen($file_to_save2, "w") or die("Unable to open file!");
 				$txt = $html;
 				fwrite($myfile, $txt);			
