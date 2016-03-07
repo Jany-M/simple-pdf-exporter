@@ -15,16 +15,16 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Export a single PDF with all posts, or custom post types.
 
-> ** IMPORTANT ** This plugin requires at least 512MB of free RAM available, or it will timeout / return an error).
+> **IMPORTANT** This plugin requires at least 512MB of free RAM available, or it will timeout / return an error).
 
-= The Basics ==
+= The Basics =
 
 The plugin checks if a pdf already exists with the same date (ddMonyear), if yes, the existing pdf will be served, otherwise a new will be generated. Since the PDF generation uses up a lot of resources, this will prevent too many runs of the plugin and the crashing of your server.
 Check the example below or the FAQ for ways to force the PDF generation anyway.
 
-** Depending on how many posts you have, it might take from a few seconds to several minutes for a new PDF to be generated. **
+**Depending on how many posts you have, it might take from a few seconds to several minutes for a new PDF to be generated.**
 
-> If no PDF is generated you probably don't have enough server resources. ** This can't be fixed, as PDF libraries are very resource-hungry. **
+> If no PDF is generated you probably don't have enough server resources. **This can't be fixed, as PDF libraries are very resource-hungry.**
 Ask your hosting to check how many resources you would need to run the plugin and if there is anything you can do, within your hosting limits, to make sure the plugin has enough or appropriate RAM/PHP settings.
 
 If you don't use a custom url, hence you don't add the `post_type` parameter to the url, the default post type exported will always be WP default `post`.
@@ -74,13 +74,37 @@ Check the FAQ before opening new threads in the forum!
 == Installation ==
 
 1. Download and activate the plugin.
-2. In order to export a pdf, you can do it from backend from Tools -> PDF Export or enter `http://yoursite.com/?export=pdf` in your browser. You can also make the url into a link or button on your site, to use on frontend.
+2. In order to export a pdf, you can do it from backend from Tools -> PDF Export or enter `http://yoursite.com/?export=pdf` in your browser. You can also make the url into a link or button on your site, to use on frontend, please check the FAQ.
 
 == Frequently Asked Questions ==
 
 = I activated the plugin but can't see any difference. What do I do? =
 In order to export a pdf, you can do it from backend from Tools -> PDF Export or enter `http://yoursite.com/?export=pdf` in your browser.
 You can also make the url into a link or button on your site, to use on frontend.
+
+= How do I make a button or link for the frontend? =
+You can add a frontend link or button on your frontend and customize it, like in this example for Twitter Bootstrap:
+Change the parameters to suit your needs.
+
+`<?php // Check if PDF Export Plugin exists first
+if( function_exists('pdf_export')) { ?>
+	<ul class="nav nav-tabs pull-right pdf_export_menu">
+		<li role="presentation" class="dropdown">
+		<a class="dropdown-toggle btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Export Posts to PDF <span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<?php
+					$post_type_to_export = 'portfolio';
+					$final_pdf = SIMPLE_PDF_EXPORTER_EXPORT.$post_type_tp_export'_export-'.date('dMY').'.pdf';
+					if(file_exists($final_pdf)) {
+						$file_date = date("d M Y - H:i", filemtime($final_pdf));
+						?>
+						<li><a class="" href="?export=pdf&post_type=portfolio&num=3" target="_blank">Download Existing Version <small>(<?php echo $file_date; ?> GMT)</small></a></li>
+				<?php } ?>
+				<li><a class="" href="?export=pdf&post_type=portfolio&num=3&force" target="_blank">Generate New Version <small>(might take several minutes)</small></a></li>
+			</ul>
+		</li>
+	</ul>
+<?php } ?>`
 
 = I want to limit the amount of posts =
 Use `&num=x` after your url

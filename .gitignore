@@ -3,3 +3,8 @@ banner-772x250.jpg
 icon-256x256.jpg
 icon-128x128.jpg
 simple-pdf-exporter.zip
+.svn/entries
+.svn/format
+*.svn-base
+*.db
+*.db-journal
