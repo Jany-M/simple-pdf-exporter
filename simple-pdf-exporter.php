@@ -2,14 +2,14 @@
 /**
  * Plugin Name: Simple PDF Exporter
  * Plugin URI: https://wordpress.org/plugins/simple-pdf-exporter/
- * Description: Export a single PDF with all posts, or custom post types. <strong>Requires at least 512MB of free RAM on this server.</strong>
- * Version: 1.7.2
+ * Description: Export a single PDF with all posts, or custom post types. <strong>Requires at least 512MB of free RAM on your server.</strong>
+ * Version: 1.7.3
  * Author: Shambix
  * Author URI: http://www.shambix.com
  * License GPLv3
 */
 
-define('SIMPLE_PDF_EXPORTER_VERS', '1.7.2');
+//define('SIMPLE_PDF_EXPORTER_VERS', '1.7.3');
 
 /*--------------------------------------
 |                                      |
@@ -76,7 +76,7 @@ define('SIMPLE_PDF_EXPORTER_VERS', '1.7.2');
                 
                 add_action('wp_loaded', 'simple_pdf_export_process');
 
-                $SIMPLE_PDF_Settings = new SIMPLE_PDF_Settings();
+                $SIMPLE_PDF_EXPORT_SETTINGS = new SIMPLE_PDF_EXPORT_SETTINGS();
             }
 
             public static function activate() {

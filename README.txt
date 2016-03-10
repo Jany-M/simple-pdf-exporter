@@ -15,7 +15,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Export a single PDF with all posts, or custom post types.
 
-> **IMPORTANT** This plugin requires at least 512MB of free RAM available, or it will timeout / return an error).
+> **IMPORTANT** This plugin requires at least 512MB of free RAM available, or it will timeout / return an error.
 
 = The Basics =
 
@@ -38,7 +38,7 @@ if( function_exists('pdf_export')) { ?>
 		<a class="dropdown-toggle btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Export Posts to PDF <span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<?php
-					$final_pdf = PDF_EXPORT.'post_export-'.date('dMY').'.pdf';
+					$final_pdf = SIMPLE_PDF_EXPORTER_EXPORT.'post_export-'.date('dMY').'.pdf';
 					if(file_exists($final_pdf)) {
 						$file_date = date("d M Y - H:i", filemtime($final_pdf));
 						?>
@@ -56,7 +56,7 @@ Currently, the template for the each exported post is very basic (and a table, s
 Your layout must be echoed in php. eg. `echo '<div>the content goes here</div>';` or it won't show up in the PDF.
 
 You can use a custom CSS to customize the layout.
-Create a pdf.css in your theme folder, otherwise the plugin's default (and really basic) CSS will be used (you can find it here `wp-content/plugins/simple-pdf-exporter/assets/pdf_export.css`)
+Create a pdf_export.css in your theme folder, otherwise the plugin's default (and really basic) CSS will be used (you can find it here `wp-content/plugins/simple-pdf-exporter/assets/pdf_export.css`)
 
 = Questions? =
 
