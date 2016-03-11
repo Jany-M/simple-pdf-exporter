@@ -3,7 +3,7 @@
 if(!function_exists('create_pdf_layout')) {
 
 	function create_pdf_layout($post, $term ) {
-		global $post, $pdf_export_css_file;
+		global $post;
 
 		$html = '';
 
@@ -11,7 +11,7 @@ if(!function_exists('create_pdf_layout')) {
 
 		// HEADER
 		echo '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><title>PDF EXPORT</title>';
-		echo '<link rel="stylesheet" type="text/css" href="'.$pdf_export_css_file.'" />';
+		echo '<link rel="stylesheet" type="text/css" href="'.SIMPLE_PDF_EXPORTER_CSS_FILE.'" />';
 		echo '</head><body>';
 
 		// CONTENT

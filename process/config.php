@@ -8,7 +8,9 @@
 
 global  $pdf_posts_per_page, 
 		$pdf_export_post_type,
+		$pdf_export_post_id,
 		$pdf_export_css_file,
+		$pdf_export_final_pdf,
 		$pdf_export_force;
 
 if(!file_exists(SIMPLE_PDF_EXPORTER_CSS_FILE))
@@ -23,11 +25,11 @@ if(!file_exists(SIMPLE_PDF_EXPORTER_CSS_FILE))
 require_once SIMPLE_PDF_EXPORTER_PLUGIN.'libs/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 
-require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/pdf_layout.php');
+require_once(SIMPLE_PDF_EXPORTER_PROCESS.'pdf_layout.php');
 require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/fpdf/fpdf.php');
 require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/fpdi/fpdi.php');
 require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/fpdi_addon/annots.php');
-if (SIMPLE_PDF_EXPORTER_PAGINATION ) {
+if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1)
 	require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/pageno/pdfnumber.php');
 	require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'libs/pageno/pageno.php');
 }

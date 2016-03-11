@@ -14,6 +14,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 == Description ==
 
 Export a single PDF with all posts, or custom post types.
+You can also export a single post, or the exact number you need.
 
 > **IMPORTANT** This plugin requires at least 512MB of free RAM available, or it will timeout / return an error.
 
@@ -28,27 +29,6 @@ Check the example below or the FAQ for ways to force the PDF generation anyway.
 Ask your hosting to check how many resources you would need to run the plugin and if there is anything you can do, within your hosting limits, to make sure the plugin has enough or appropriate RAM/PHP settings.
 
 If you don't use a custom url, hence you don't add the `post_type` parameter to the url, the default post type exported will always be WP default `post`.
-
-You can add a frontend link or button on your frontend and customize it, like in this example for Twitter Bootstrap:
-
-`<?php // Check if PDF Export Plugin exists first
-if( function_exists('pdf_export')) { ?>
-	<ul class="nav nav-tabs pull-right pdf_export_menu">
-		<li role="presentation" class="dropdown">
-		<a class="dropdown-toggle btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Export Posts to PDF <span class="caret"></span></a>
-			<ul class="dropdown-menu">
-				<?php
-					$final_pdf = SIMPLE_PDF_EXPORTER_EXPORT.'post_export-'.date('dMY').'.pdf';
-					if(file_exists($final_pdf)) {
-						$file_date = date("d M Y - H:i", filemtime($final_pdf));
-						?>
-						<li><a class="" href="?export=pdf" target="_blank">Download Existing Version <small>(<?php echo $file_date; ?> GMT)</small></a></li>
-				<?php } ?>
-				<li><a class="" href="?export=pdf&force" target="_blank">Generate New Version <small>(might take several minutes)</small></a></li>
-			</ul>
-		</li>
-	</ul>
-<?php } ?>`
 
 = The PDF Template =
 
@@ -87,14 +67,14 @@ You can add a frontend link or button on your frontend and customize it, like in
 Change the parameters to suit your needs.
 
 `<?php // Check if PDF Export Plugin exists first
-if( function_exists('pdf_export')) { ?>
+if( function_exists('simple_pdf_export_process')) { ?>
 	<ul class="nav nav-tabs pull-right pdf_export_menu">
 		<li role="presentation" class="dropdown">
 		<a class="dropdown-toggle btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Export Posts to PDF <span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<?php
 					$post_type_to_export = 'portfolio';
-					$final_pdf = SIMPLE_PDF_EXPORTER_EXPORT.$post_type_tp_export'_export-'.date('dMY').'.pdf';
+					$final_pdf = SIMPLE_PDF_EXPORTER_EXPORT.$post_type_to_export.SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME.date('dMY').'.pdf';
 					if(file_exists($final_pdf)) {
 						$file_date = date("d M Y - H:i", filemtime($final_pdf));
 						?>
@@ -107,11 +87,16 @@ if( function_exists('pdf_export')) { ?>
 <?php } ?>`
 
 = I want to limit the amount of posts =
-Use `&num=x` after your url
+Use `&num=x` in your url.
 eg. `http://yoursite.com/?export=pdf&num=3`
 
+= I want to export a specific post =
+Use `&post_id=x` with the ID of the post or custom post type you need, in your url.
+eg. `http://yoursite.com/?export=pdf&post_id=3`
+In this case, don't use the `post_type` parameter. The `num` parameter will be ignored for obvious reasons.
+
 = I want to create a PDF from a custom post type =
-Use `&post_type=x`
+Use `&post_type=x`.
 eg. `http://yoursite.com/?export=pdf&post_type=your-post-type-slug`
 
 = How do I customize the layout of the posts in the pdf? =
@@ -135,6 +120,7 @@ Here's the full list and what they are set to, by default:
 * define(SIMPLE_PDF_EXPORTER_PAGINATION', false);
 * define(SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
 * define(SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory_uri().'/pdf_export.css');
+* define('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME', '-');
 * define('DOMPDF_PAPER_SIZE', 'A4');
 * define('DOMPDF_PAPER_ORIENTATION', 'portrait');
 * define('DOMPDF_DPI', 72);
@@ -146,6 +132,16 @@ Here's the full list and what they are set to, by default:
 
 
 == Changelog ==
+
+= 1.8 (11 mar 2016) =
+* Added parameter `post_id` (for exporting specific post)
+* Added better checks to save exec time
+* Added url examples in Settings page
+* Cleaned up
+
+= 1.7.6 (10 mar 2016) =
+* Fixed bugs with wrong/obsolete vars & constants
+* Added constant SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME to customize the final pdf name (after post type, before the date)
 
 = 1.7 (3 mar 2016) =
 * Cleaned up everything
@@ -165,7 +161,6 @@ Here's the full list and what they are set to, by default:
 * Added caching in wp queries
 * Heavy use of single config
 * Re-wrote plugin activation - deactivation
-* Created WP event cron job
 * Create html versions too, on request (config)
 * Added custom css file, as well as pre-made one (instead of inline css)
 * Merged posts pdf creation with page number and posts merge

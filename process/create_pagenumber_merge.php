@@ -2,24 +2,31 @@
 require_once(SIMPLE_PDF_EXPORTER_PROCESS.'config.php');
 use Dompdf\Dompdf;
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ERROR | E_PARSE);
+
 function create_pagenumber_merge() {
 
-	global $wp_query, $pdf_export_post_type, $pdf_posts_per_page, $pdf_export_force;
+	global $pdf_export_post_type, $pdf_export_post_id, $pdf_posts_per_page, $pdf_export_force, $pdf_export_final_pdf;
 
-	$newpdfpathname = SIMPLE_PDF_EXPORTER_EXPORT.$pdf_export_post_type.'_export-'.date('dMY').'.pdf';
+	// Get post type in case the post_id parameter was used, but not the post_type one
+	if($pdf_export_post_id != '' && $pdf_export_post_type = 'post') {
+		$pdf_export_post_type = get_post_type($pdf_export_post_id);
+	}
 
 	// Merge Settings
 	$pdf = new DC_Rate_Plan_Pdf_All_PDFMerger;
 
 	// Page Number Settings
-	if(SIMPLE_PDF_EXPORTER_PAGINATION) {
+	if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
 		$pdf2 = new PAGENO;
 		$pno = 1;
 		$page_offset = 0;
-		function add_page_no($newpdfpathname, $newpdfpathname2, $offset=0) {
+		function add_page_no($pdf_export_final_pdf, $newpdfpathname2, $offset=0) {
 			$pdf123= new PDF();
 		    $pdf123->offset = $offset;
-		    $pagecount = $pdf123->setSourceFile($newpdfpathname);
+		    $pagecount = $pdf123->setSourceFile($pdf_export_final_pdf);
 		    
 		    for ($i=1; $i <= $pagecount; $i++) {
 		        $tplidx = $pdf123->ImportPage($i);
@@ -48,14 +55,21 @@ function create_pagenumber_merge() {
 		delete_transient('simple_pdf_export_posts');
 
 	if(get_transient('simple_pdf_export_posts') === false) {
-
+		
 		// The Query
-		$pdf_query_args = array(
-			'posts_per_page'   => $pdf_posts_per_page,
-			'post_type' => $pdf_export_post_type,
-			'post_status'      => 'publish',
-			//'post_parent'      => 0,
-		);
+		if($pdf_export_post_id != '') { // Get a specific Post
+			$pdf_query_args = array(
+				'p'   => $pdf_export_post_id,
+				'post_type' => $pdf_export_post_type
+			);
+		} else {
+			$pdf_query_args = array( // Get all Posts
+				'posts_per_page'   => $pdf_posts_per_page,
+				'post_type' => $pdf_export_post_type,
+				'post_status'      => 'publish',
+				//'post_parent'      => 0,
+			);
+		}
 
 		$pdf_query = new WP_Query( $pdf_query_args );
 
@@ -67,17 +81,18 @@ function create_pagenumber_merge() {
 
 	// Get the Posts
 	if ($pdf_query->have_posts()) : while ($pdf_query->have_posts()) : $pdf_query->the_post();
+
+		global $post;
+		setup_postdata($post); 
 		
 		$post_id = get_the_ID();
-
 		$file_to_save = SIMPLE_PDF_EXPORTER_EXPORT.'pdf/'.$post_id.'.pdf';
-		
+
 		if ($pdf_export_force = true || !file_exists($file_to_save) || date("dMY-H", filemtime($file_to_save)) != date('dMY-H')) {
 
 			$html = create_pdf_layout($post,$term);
-			
+
 			// DOMPDF	
-			//$dompdf = new DOMPDF(array($dompdf_settings));
 			$dompdf = new DOMPDF();
 			$dompdf->setPaper(DOMPDF_PAPER_SIZE, DOMPDF_PAPER_ORIENTATION);
 		    $options = $dompdf->getOptions();
@@ -94,8 +109,7 @@ function create_pagenumber_merge() {
 			$dompdf->load_html(stripslashes(preg_replace('/\s{2,}/', '', $html)));
 			$dompdf->render();
 
-
-			if(SIMPLE_PDF_EXPORTER_PAGINATION) {
+			if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
 				$file_to_save_temp = $file_to_save.'.temp';
 				//save the temporary pdf file on the server
 				file_put_contents($file_to_save_temp, $dompdf->output());
@@ -119,7 +133,7 @@ function create_pagenumber_merge() {
 	
 		}
 
-		if(SIMPLE_PDF_EXPORTER_PAGINATION) {
+		if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
 			// Pagination Stuff
 			update_post_meta($post_id, 'pdf_export_page_no', $pno);
 			$pagecount = $pdf2->setSourceFile($file_to_save);
@@ -130,14 +144,15 @@ function create_pagenumber_merge() {
 		$pdf->addPDF($file_to_save, 'all');
 		//$dompdf->stream($file_to_save, array('Attachment'=>'0')); // this opens it directly, in the same window
 
+		wp_reset_postdata(); wp_reset_query();
+
 	endwhile; 
 
 	else:
-	wp_die('This post type: '.$pdf_export_post_type.' doesn\'t have any posts!<br/>Try to add to your URL &post_type=slug-of-post-type and make sure there actually are published posts of that type.', 'Simple PDF Exporter');
+	wp_die('The post type "'.$pdf_export_post_type.'"" doesn\'t have any posts!<br/>Try to add to your URL &post_type=slug-of-post-type and make sure there actually are published posts of that type.', 'Simple PDF Exporter');
 
-	wp_reset_postdata();  endif;
+	endif;
 
-	// Merge all PDFs in one
-	$pdf->merge('file', $newpdfpathname);
+	$pdf->merge('file', $pdf_export_final_pdf);
 
 }

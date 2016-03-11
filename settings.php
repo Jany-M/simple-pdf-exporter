@@ -59,6 +59,13 @@ if(!class_exists('SIMPLE_PDF_EXPORT_SETTINGS')) {
                 <p>If you need to export a custom post type, or you want to customize the layout, number of posts exported or build a frontend custom button, please refer to the <a href="https://wordpress.org/plugins/simple-pdf-exporter/faq/" target="_blank">FAQ</a>.</p>
                 <p><strong>Remember that if you don't have at least 512MB of RAM, on this server, the export will fail.</strong></p>
                 <a class="ccsve_button button button-success" href="?export=pdf&force">Export to PDF</a>
+                <br/>
+                <p>Here are some url examples you can use (adjust to your needs before pasting it in your browser):</p>
+                <ul>
+                    <li><a href="<?php echo get_bloginfo('url'); ?>?export=pdf&num=1&post_type=portfolio&force"><?php echo get_bloginfo('url'); ?>?export=pdf&num=1&post_type=portfolio&force</a></li>
+                    <li><a href="<?php echo get_bloginfo('url'); ?>?export=pdf&post_id=1234&force"><?php echo get_bloginfo('url'); ?>?export=pdf&post_id=1234&force</a></li>
+                    <li></li>
+                </ul>
 
           </div>
         <?php
