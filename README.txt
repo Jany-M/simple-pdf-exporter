@@ -120,6 +120,7 @@ Here's the full list and what they are set to, by default:
 * define(SIMPLE_PDF_EXPORTER_PAGINATION', false);
 * define(SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
 * define(SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory_uri().'/pdf_export.css');
+* define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory_uri().'/pdf_export.php');
 * define('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME', '-');
 * define('DOMPDF_PAPER_SIZE', 'A4');
 * define('DOMPDF_PAPER_ORIENTATION', 'portrait');
@@ -132,6 +133,9 @@ Here's the full list and what they are set to, by default:
 
 
 == Changelog ==
+
+= 1.8.2 (28 mar 2016) =
+* Added constant SIMPLE_PDF_EXPORTER_LAYOUT_FILE so you can put it in theme and wont get overwritten
 
 = 1.8 (11 mar 2016) =
 * Added parameter `post_id` (for exporting specific post)

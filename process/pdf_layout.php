@@ -1,4 +1,6 @@
 <?php 
+require_once(SIMPLE_PDF_EXPORTER_PROCESS.'config.php');
+global $pdf_full_pdf;
 
 if(!function_exists('create_pdf_layout')) {
 
@@ -9,10 +11,12 @@ if(!function_exists('create_pdf_layout')) {
 
 		ob_start();
 
-		// HEADER
-		echo '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><title>PDF EXPORT</title>';
-		echo '<link rel="stylesheet" type="text/css" href="'.SIMPLE_PDF_EXPORTER_CSS_FILE.'" />';
-		echo '</head><body>';
+		if(!isset($pdf_full_pdf)) {
+			// HEADER
+			echo '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><title>PDF EXPORT</title>';
+			echo '<link rel="stylesheet" type="text/css" href="'.SIMPLE_PDF_EXPORTER_CSS_FILE.'" />';
+			echo '</head><body>';
+		}
 
 		// CONTENT
 		echo '<div class="main_div">';
@@ -38,8 +42,10 @@ if(!function_exists('create_pdf_layout')) {
 			echo "</table>";		
 		echo "</div>";
 
-		// FOOTER
-		echo "</body></html>";
+		if(!isset($pdf_full_pdf)) {
+			// FOOTER
+			echo "</body></html>";
+		}
 		
 		return ob_get_clean();
 	}

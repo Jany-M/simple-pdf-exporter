@@ -6,9 +6,9 @@ use Dompdf\Dompdf;
 ini_set('display_startup_errors', 1);
 error_reporting(E_ERROR | E_PARSE);*/
 
-function create_pagenumber_merge() {
+function create_full_single_pdf() {
 
-	global $pdf_export_post_type, $pdf_export_post_id, $pdf_posts_per_page, $pdf_export_force, $pdf_export_final_pdf;
+	global $pdf_export_post_type, $pdf_export_post_id, $pdf_posts_per_page, $pdf_export_force, $pdf_export_final_pdf, $pdf_full_pdf;
 
 	// Get post type in case the post_id parameter was used, but not the post_type one
 	if($pdf_export_post_id != '' && $pdf_export_post_type = 'post') {
@@ -16,10 +16,10 @@ function create_pagenumber_merge() {
 	}
 
 	// Merge Settings
-	$pdf = new DC_Rate_Plan_Pdf_All_PDFMerger;
+	//$pdf = new DC_Rate_Plan_Pdf_All_PDFMerger;
 
 	// Page Number Settings
-	if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
+	/*if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
 		$pdf2 = new PAGENO;
 		$pno = 1;
 		$page_offset = 0;
@@ -48,7 +48,7 @@ function create_pagenumber_merge() {
 			gc_collect_cycles();
 			return $pagecount;
 		}
-	}
+	}*/
 
 	// Check for Cached Posts
 	if($pdf_export_force = true)
@@ -79,6 +79,11 @@ function create_pagenumber_merge() {
 
 	$pdf_query = get_transient('simple_pdf_export_posts');
 
+	// Start the HTML now
+	$html = '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><title>PDF EXPORT</title>';
+	$html .= '<link rel="stylesheet" type="text/css" href="'.SIMPLE_PDF_EXPORTER_CSS_FILE.'" />';
+	$html .= '</head><body>';
+
 	// Get the Posts
 	if ($pdf_query->have_posts()) : while ($pdf_query->have_posts()) : $pdf_query->the_post();
 
@@ -86,30 +91,13 @@ function create_pagenumber_merge() {
 		setup_postdata($post); 
 		
 		$post_id = get_the_ID();
-		$file_to_save = SIMPLE_PDF_EXPORTER_EXPORT.'pdf/'.$post_id.'.pdf';
+		//$file_to_save = SIMPLE_PDF_EXPORTER_EXPORT.'pdf/'.$post_id.'.pdf';
 
 		if ($pdf_export_force = true || !file_exists($file_to_save) || date("dMY-H", filemtime($file_to_save)) != date('dMY-H')) {
 
-			$html = create_pdf_layout($post,$term);
+			$html .= create_pdf_layout($post,$term);
 
-			// DOMPDF	
-			$dompdf = new DOMPDF();
-			$dompdf->setPaper(DOMPDF_PAPER_SIZE, DOMPDF_PAPER_ORIENTATION);
-		    $options = $dompdf->getOptions();
-		    $options->set(array(
-		        'isHtml5ParserEnabled' => DOMPDF_ENABLE_HTML5,
-		        'isRemoteEnabled' => DOMPDF_ENABLE_REMOTE,
-		        'dpi' => DOMPDF_DPI,
-		        'isFontSubsettingEnabled' => DOMPDF_ENABLE_FONTSUBSETTING,
-		        'defaultMediaType' => DOMPDF_MEDIATYPE,
-		        'fontHeightRatio' => DOMPDF_FONTHEIGHTRATIO
-		    ));
-	      	$dompdf->setOptions($options);
-
-			$dompdf->load_html(stripslashes(preg_replace('/\s{2,}/', '', $html)));
-			$dompdf->render();
-
-			if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
+			/*if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
 				$file_to_save_temp = $file_to_save.'.temp';
 				//save the temporary pdf file on the server
 				file_put_contents($file_to_save_temp, $dompdf->output());
@@ -120,7 +108,7 @@ function create_pagenumber_merge() {
 			} else {
 				//save the pdf file on the server
 				file_put_contents($file_to_save, $dompdf->output());	
-			}
+			}*/
 
 			// WRITE TO HTML FILES - DEBUG ONLY
 			if(SIMPLE_PDF_EXPORTER_HTML_OUTPUT) {
@@ -133,26 +121,50 @@ function create_pagenumber_merge() {
 	
 		}
 
-		if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
+		/*if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
 			// Pagination Stuff
 			update_post_meta($post_id, 'pdf_export_page_no', $pno);
 			$pagecount = $pdf2->setSourceFile($file_to_save);
 			$pno += $pagecount;
-		}
+		}*/
 
 		// Create PDF of single post
-		$pdf->addPDF($file_to_save, 'all');
+		//$pdf->addPDF($file_to_save, 'all');
 		//$dompdf->stream($file_to_save, array('Attachment'=>'0')); // this opens it directly, in the same window
 
 		wp_reset_postdata(); wp_reset_query();
 
-	endwhile; 
+	endwhile;
+
+	// End the HTML
+	$html .= "</body></html>";
+
+	// DOMPDF
+	$dompdf = new DOMPDF();
+	$dompdf->setPaper(DOMPDF_PAPER_SIZE, DOMPDF_PAPER_ORIENTATION);
+	$options = $dompdf->getOptions();
+	$options->set(array(
+		'isHtml5ParserEnabled' => DOMPDF_ENABLE_HTML5,
+		'isRemoteEnabled' => DOMPDF_ENABLE_REMOTE,
+		'dpi' => DOMPDF_DPI,
+		'isFontSubsettingEnabled' => DOMPDF_ENABLE_FONTSUBSETTING,
+		'defaultMediaType' => DOMPDF_MEDIATYPE,
+		'fontHeightRatio' => DOMPDF_FONTHEIGHTRATIO
+	));
+	$dompdf->setOptions($options);
+
+	$dompdf->load_html(stripslashes(preg_replace('/\s{2,}/', '', $html)));
+	$dompdf->render();
+
+	// Create PDF of single post
+	$pdf->addPDF($pdf_export_final_pdf, 'all');
+	//$dompdf->stream($file_to_save, array('Attachment'=>'0')); // this opens it directly, in the same window
 
 	else:
 	wp_die('The post type "'.$pdf_export_post_type.'"" doesn\'t have any posts!<br/>Try to add to your URL &post_type=slug-of-post-type and make sure there actually are published posts of that type.', 'Simple PDF Exporter');
 
 	endif;
 
-	$pdf->merge('file', $pdf_export_final_pdf);
+	//$pdf->merge('file', $pdf_export_final_pdf);
 
 }
