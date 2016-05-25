@@ -3,7 +3,7 @@
 Contributors: dukessa, Shambix
 Tags: pdf, dompdf, exporter, export, custom post types, export pdf, pdf collection, create pdf
 Requires at least: 4
-Tested up to: 4.4.1
+Tested up to: 4.5
 Stable tag: trunk
 Author: Shambix
 Author URI: http://www.shambix.com
@@ -119,8 +119,8 @@ Here's the full list and what they are set to, by default:
 
 * define(SIMPLE_PDF_EXPORTER_PAGINATION', false);
 * define(SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
-* define(SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory_uri().'/pdf_export.css');
-* define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory_uri().'/pdf_export.php');
+* define(SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory().'/pdf_export.css');
+* define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory().'/pdf_export.php');
 * define('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME', '-');
 * define('DOMPDF_PAPER_SIZE', 'A4');
 * define('DOMPDF_PAPER_ORIENTATION', 'portrait');
@@ -133,6 +133,10 @@ Here's the full list and what they are set to, by default:
 
 
 == Changelog ==
+
+= 1.8.4 (14 apr 2016) =
+* Fixed path for custom CSS and Layout file
+* Fixed CSS var in layout and check for existing CSS and Layout custom file in template
 
 = 1.8.2 (28 mar 2016) =
 * Added constant SIMPLE_PDF_EXPORTER_LAYOUT_FILE so you can put it in theme and wont get overwritten
@@ -170,4 +174,4 @@ Here's the full list and what they are set to, by default:
 * Merged posts pdf creation with page number and posts merge
 
 = 1.0 (23 feb 2016) =
-* Initial release on Github 
+* Initial release on Github

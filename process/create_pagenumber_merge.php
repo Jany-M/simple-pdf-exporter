@@ -27,7 +27,7 @@ function create_pagenumber_merge() {
 			$pdf123= new PDF();
 		    $pdf123->offset = $offset;
 		    $pagecount = $pdf123->setSourceFile($pdf_export_final_pdf);
-		    
+
 		    for ($i=1; $i <= $pagecount; $i++) {
 		        $tplidx = $pdf123->ImportPage($i);
 		        $size = $pdf123->getTemplateSize($tplidx);
@@ -37,11 +37,11 @@ function create_pagenumber_merge() {
 		        } else {
 		            $pdf123->AddPage('P', array($size['w'], $size['h']));
 		        }
-		        
+
 		        //$pdf->addPage();
 		        $pdf123->useTemplate($tplidx);
 		    }
-		    
+
 		    $pdf123->Output($newpdfpathname2,"F");
 
 			unset($pdf123);
@@ -55,7 +55,7 @@ function create_pagenumber_merge() {
 		delete_transient('simple_pdf_export_posts');
 
 	if(get_transient('simple_pdf_export_posts') === false) {
-		
+
 		// The Query
 		if($pdf_export_post_id != '') { // Get a specific Post
 			$pdf_query_args = array(
@@ -83,8 +83,8 @@ function create_pagenumber_merge() {
 	if ($pdf_query->have_posts()) : while ($pdf_query->have_posts()) : $pdf_query->the_post();
 
 		global $post;
-		setup_postdata($post); 
-		
+		setup_postdata($post);
+
 		$post_id = get_the_ID();
 		$file_to_save = SIMPLE_PDF_EXPORTER_EXPORT.'pdf/'.$post_id.'.pdf';
 
@@ -92,7 +92,7 @@ function create_pagenumber_merge() {
 
 			$html = create_pdf_layout($post,$term);
 
-			// DOMPDF	
+			// DOMPDF
 			$dompdf = new DOMPDF();
 			$dompdf->setPaper(DOMPDF_PAPER_SIZE, DOMPDF_PAPER_ORIENTATION);
 		    $options = $dompdf->getOptions();
@@ -119,7 +119,7 @@ function create_pagenumber_merge() {
 				unlink($file_to_save_temp);
 			} else {
 				//save the pdf file on the server
-				file_put_contents($file_to_save, $dompdf->output());	
+				file_put_contents($file_to_save, $dompdf->output());
 			}
 
 			// WRITE TO HTML FILES - DEBUG ONLY
@@ -127,10 +127,10 @@ function create_pagenumber_merge() {
 				$file_to_save2 = SIMPLE_PDF_EXPORTER_EXPORT.'html/'.$post_id.'.html';
 				$myfile = fopen($file_to_save2, "w") or die("Unable to open file!");
 				$txt = $html;
-				fwrite($myfile, $txt);			
+				fwrite($myfile, $txt);
 				fclose($myfile);
 			}
-	
+
 		}
 
 		if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
@@ -146,7 +146,7 @@ function create_pagenumber_merge() {
 
 		wp_reset_postdata(); wp_reset_query();
 
-	endwhile; 
+	endwhile;
 
 	else:
 	wp_die('The post type "'.$pdf_export_post_type.'"" doesn\'t have any posts!<br/>Try to add to your URL &post_type=slug-of-post-type and make sure there actually are published posts of that type.', 'Simple PDF Exporter');

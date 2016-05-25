@@ -8,3 +8,4 @@ simple-pdf-exporter.zip
 *.svn-base
 *.db
 *.db-journal
+process/pdf_layout_custom.php

@@ -1,22 +1,20 @@
-<?php 
+<?php
 require_once(SIMPLE_PDF_EXPORTER_PROCESS.'config.php');
-global $pdf_full_pdf;
+global $pdf_export_css_file;
 
 if(!function_exists('create_pdf_layout')) {
 
 	function create_pdf_layout($post, $term ) {
-		global $post;
+		global $post, $pdf_export_css_file;
 
 		$html = '';
 
 		ob_start();
 
-		if(!isset($pdf_full_pdf)) {
-			// HEADER
-			echo '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><title>PDF EXPORT</title>';
-			echo '<link rel="stylesheet" type="text/css" href="'.SIMPLE_PDF_EXPORTER_CSS_FILE.'" />';
-			echo '</head><body>';
-		}
+		// HEADER
+		echo '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><title>PDF EXPORT</title>';
+		echo '<link rel="stylesheet" type="text/css" href="'.$pdf_export_css_file.'" />';
+		echo '</head><body>';
 
 		// CONTENT
 		echo '<div class="main_div">';
@@ -24,9 +22,9 @@ if(!function_exists('create_pdf_layout')) {
 			echo '<table cellspacing="0" width="100%"">';
 				echo '<tr>';
 				echo '<td>';
-				echo '<h2>'.get_the_title().'</h2>';		
+				echo '<h2>'.get_the_title().'</h2>';
 				echo '</td>';
-				echo '</tr>';			
+				echo '</tr>';
 
 					echo '<table cellspacing="0" width="100%">';
 					echo '<tr>';
@@ -39,15 +37,13 @@ if(!function_exists('create_pdf_layout')) {
 				echo "</td>";
 				echo "</tr>";
 
-			echo "</table>";		
+			echo "</table>";
 		echo "</div>";
 
-		if(!isset($pdf_full_pdf)) {
-			// FOOTER
-			echo "</body></html>";
-		}
+		// FOOTER
+		echo "</body></html>";
 		
 		return ob_get_clean();
 	}
-	
+
 }

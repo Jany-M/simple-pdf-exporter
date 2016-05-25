@@ -1,22 +1,24 @@
 <?php
 
-/* -------------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------------
 *
 * CUSTOM VARS & SETUP
 *
 -------------------------------------------------------------------------------- */
 
-global  $pdf_posts_per_page, 
+global  $pdf_posts_per_page,
 		$pdf_export_post_type,
 		$pdf_export_post_id,
 		$pdf_export_css_file,
 		$pdf_export_final_pdf,
-		$pdf_full_pdf,
 		$pdf_export_force;
 
 // CSS
-if(!file_exists(SIMPLE_PDF_EXPORTER_CSS_FILE))
+if(file_exists(SIMPLE_PDF_EXPORTER_CSS_FILE)) {
+	$pdf_export_css_file = SIMPLE_PDF_EXPORTER_CSS_FILE;
+} else {
 	$pdf_export_css_file = esc_url(plugins_url('assets/pdf_export.css', dirname(__FILE__)));
+}
 
 // LAYOUT
 if(file_exists(SIMPLE_PDF_EXPORTER_LAYOUT_FILE)) {
@@ -25,7 +27,7 @@ if(file_exists(SIMPLE_PDF_EXPORTER_LAYOUT_FILE)) {
 	require_once(SIMPLE_PDF_EXPORTER_PROCESS.'pdf_layout.php');
 }
 
-/* -------------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------------
 *
 * INCLUDES
 *
