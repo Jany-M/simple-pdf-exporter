@@ -58,7 +58,8 @@ function create_pagenumber_merge() {
 	if($pdf_export_force === true)
 		delete_transient('simple_pdf_export_posts');
 
-	if(get_transient('simple_pdf_export_posts') === false) {
+	// Check if transient has expired or doesnt exist
+	if (get_option('_transient_timeout_simple_pdf_export_posts') < time() || get_transient('simple_pdf_export_posts') == false) {
 
 		// The Query
 		if($pdf_export_post_id != '') { // Get a specific Post
