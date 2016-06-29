@@ -3,7 +3,7 @@
 Contributors: dukessa, Shambix
 Tags: pdf, dompdf, exporter, export, custom post types, export pdf, pdf collection, create pdf
 Requires at least: 4
-Tested up to: 4.5
+Tested up to: 4.5.3
 Stable tag: trunk
 Author: Shambix
 Author URI: http://www.shambix.com
@@ -106,6 +106,7 @@ Your layout must be echoed in php. eg. `echo '<div>the content goes here</div>';
 = I want to override the existing file / generate a new pdf no matter what =
 Use `&force` after your url
 eg. `http://yoursite.com/?export=pdf&force`
+This will also invalidate the internal cache, hence it will take more time to generate the PDF. Avoid if possible.
 
 = Can I use a custom CSS file? =
 You can use a custom CSS to customize the layout.
@@ -133,6 +134,10 @@ Here's the full list and what they are set to, by default:
 
 
 == Changelog ==
+
+= 1.8.6 (29 jun 2016) =
+* Improvements to caching
+* Small fixes
 
 = 1.8.4 (14 apr 2016) =
 * Fixed path for custom CSS and Layout file

@@ -8,7 +8,11 @@ error_reporting(E_ERROR | E_PARSE);*/
 
 function create_pagenumber_merge() {
 
-	global $pdf_export_post_type, $pdf_export_post_id, $pdf_posts_per_page, $pdf_export_force, $pdf_export_final_pdf;
+	global 	$pdf_export_post_type,
+            $pdf_export_force,
+            $pdf_posts_per_page,
+            $pdf_export_post_id,
+            $pdf_export_final_pdf;
 
 	// Get post type in case the post_id parameter was used, but not the post_type one
 	if($pdf_export_post_id != '' && $pdf_export_post_type = 'post') {
@@ -51,7 +55,7 @@ function create_pagenumber_merge() {
 	}
 
 	// Check for Cached Posts
-	if($pdf_export_force = true)
+	if($pdf_export_force === true)
 		delete_transient('simple_pdf_export_posts');
 
 	if(get_transient('simple_pdf_export_posts') === false) {
@@ -88,9 +92,18 @@ function create_pagenumber_merge() {
 		$post_id = get_the_ID();
 		$file_to_save = SIMPLE_PDF_EXPORTER_EXPORT.'pdf/'.$post_id.'.pdf';
 
-		if ($pdf_export_force = true || !file_exists($file_to_save) || date("dMY-H", filemtime($file_to_save)) != date('dMY-H')) {
+		if ($pdf_export_force === true || !file_exists($file_to_save) || date("dMY-H", filemtime($file_to_save)) != date('dMY-H')) {
 
 			$html = create_pdf_layout($post,$term);
+
+			// WRITE TO HTML FILES - DEBUG ONLY
+			if(SIMPLE_PDF_EXPORTER_HTML_OUTPUT) {
+				$file_to_save2 = SIMPLE_PDF_EXPORTER_EXPORT.'html/'.$post_id.'.html';
+				$myfile = fopen($file_to_save2, "w") or die("Unable to open file!");
+				$txt = $html;
+				fwrite($myfile, $txt);
+				fclose($myfile);
+			}
 
 			// DOMPDF
 			$dompdf = new DOMPDF();
@@ -120,15 +133,6 @@ function create_pagenumber_merge() {
 			} else {
 				//save the pdf file on the server
 				file_put_contents($file_to_save, $dompdf->output());
-			}
-
-			// WRITE TO HTML FILES - DEBUG ONLY
-			if(SIMPLE_PDF_EXPORTER_HTML_OUTPUT) {
-				$file_to_save2 = SIMPLE_PDF_EXPORTER_EXPORT.'html/'.$post_id.'.html';
-				$myfile = fopen($file_to_save2, "w") or die("Unable to open file!");
-				$txt = $html;
-				fwrite($myfile, $txt);
-				fclose($myfile);
 			}
 
 		}

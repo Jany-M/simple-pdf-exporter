@@ -6,12 +6,12 @@
 *
 -------------------------------------------------------------------------------- */
 
-global  $pdf_posts_per_page,
-		$pdf_export_post_type,
-		$pdf_export_post_id,
-		$pdf_export_css_file,
-		$pdf_export_final_pdf,
-		$pdf_export_force;
+global  $pdf_export_post_type,
+	    $pdf_export_force,
+	    $pdf_posts_per_page,
+	    $pdf_export_post_id,
+	    $pdf_export_final_pdf,
+		$pdf_export_css_file;
 
 // CSS
 if(file_exists(SIMPLE_PDF_EXPORTER_CSS_FILE)) {
@@ -24,7 +24,7 @@ if(file_exists(SIMPLE_PDF_EXPORTER_CSS_FILE)) {
 if(file_exists(SIMPLE_PDF_EXPORTER_LAYOUT_FILE)) {
 	require_once(SIMPLE_PDF_EXPORTER_LAYOUT_FILE);
 } else {
-	require_once(SIMPLE_PDF_EXPORTER_PROCESS.'pdf_layout.php');
+	require_once(SIMPLE_PDF_EXPORTER_PROCESS.'assets/pdf_layout.php');
 }
 
 /* --------------------------------------------------------------------------------

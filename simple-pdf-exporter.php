@@ -2,14 +2,14 @@
 /**
  * Plugin Name: Simple PDF Exporter
  * Plugin URI: https://wordpress.org/plugins/simple-pdf-exporter/
- * Description: Export a single PDF with all posts or a specific one, or custom post types. <strong>Requires at least 512MB of free RAM on your server.</strong>
- * Version: 1.8.4
+ * Description: Export in a single PDF, all posts, a single one, or a custom post type. <strong>Requires at least 512MB of free RAM on your server.</strong>
+ * Version: 1.8.6
  * Author: Shambix
  * Author URI: http://www.shambix.com
  * License GPLv3
 */
 
-define('SIMPLE_PDF_EXPORTER_VERS', '1.8.4');
+//define('SIMPLE_PDF_EXPORTER_VERS', '1.8.6');
 
 /*--------------------------------------
 |                                      |
@@ -27,15 +27,8 @@ define('SIMPLE_PDF_EXPORTER_VERS', '1.8.4');
     	define('SIMPLE_PDF_EXPORTER_EXPORT', $upload_dir['basedir'].'/pdf-export/');
 
     /* dont edit these here, add them to your wp-config instead */
-    if (!defined('SIMPLE_PDF_EXPORTER_CACHE'))
-      define('SIMPLE_PDF_EXPORTER_CACHE', true);
     if (!defined('SIMPLE_PDF_EXPORTER_PAGINATION'))
         define('SIMPLE_PDF_EXPORTER_PAGINATION', false);
-
-    // DEBUG
-    if (!defined('SIMPLE_PDF_EXPORTER_HTML_OUTPUT'))
-        define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
-
     // LAYOUT AND CSS
     if (!defined('SIMPLE_PDF_EXPORTER_CSS_FILE'))
         define('SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory().'/pdf_export.css');
@@ -43,7 +36,6 @@ define('SIMPLE_PDF_EXPORTER_VERS', '1.8.4');
         define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory().'/pdf_export.php');
     if (!defined('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME'))
         define('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME', '-');
-
     // DOMPDF
     if (!defined('DOMPDF_PAPER_SIZE'))
         define('DOMPDF_PAPER_SIZE', 'A4');
@@ -61,6 +53,10 @@ define('SIMPLE_PDF_EXPORTER_VERS', '1.8.4');
         define('DOMPDF_MEDIATYPE', 'print');
     if (!defined('DOMPDF_FONTHEIGHTRATIO'))
         define('DOMPDF_FONTHEIGHTRATIO', 1);
+
+        // DEBUG
+    if (!defined('SIMPLE_PDF_EXPORTER_HTML_OUTPUT'))
+        define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
 
     if (SIMPLE_PDF_EXPORTER_HTML_OUTPUT) {
         if (!is_dir(SIMPLE_PDF_EXPORTER_EXPORT.'html/') || !file_exists(SIMPLE_PDF_EXPORTER_EXPORT.'html/')) {
@@ -80,9 +76,10 @@ define('SIMPLE_PDF_EXPORTER_VERS', '1.8.4');
             public function __construct()  {
 
                 require_once(sprintf("%s/settings.php", dirname(__FILE__)));
-                require_once(sprintf("%s/exporter.php", dirname(__FILE__)));
 
-                add_action('wp_loaded', 'simple_pdf_export_process');
+                if ( isset( $_GET[ 'export' ] ) && $_GET[ 'export' ] == 'pdf' ) {
+                	add_action( 'wp_loaded', 'simple_pdf_export_process');
+                }
 
                 $SIMPLE_PDF_EXPORT_SETTINGS = new SIMPLE_PDF_EXPORT_SETTINGS();
             }
@@ -117,6 +114,8 @@ define('SIMPLE_PDF_EXPORTER_VERS', '1.8.4');
 
         register_activation_hook(__FILE__, array('SIMPLE_PDF_EXPORT', 'activate'));
         register_deactivation_hook(__FILE__, array('SIMPLE_PDF_EXPORT', 'deactivate'));
+
+        require_once(sprintf("%s/exporter.php", dirname(__FILE__)));
 
         // instantiate the plugin class
         $simple_pdf_export = new SIMPLE_PDF_EXPORT();
