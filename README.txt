@@ -1,6 +1,6 @@
 === Simple PDF Exporter ===
 
-Contributors: dukessa, Shambix
+Contributors: Shambix, Dukessa
 Tags: pdf, dompdf, exporter, export, custom post types, export pdf, pdf collection, create pdf
 Requires at least: 4
 Tested up to: 4.5.3
