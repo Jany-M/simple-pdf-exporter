@@ -3,7 +3,7 @@
 Contributors: Shambix, Dukessa
 Tags: pdf, dompdf, exporter, export, custom post types, export pdf, pdf collection, create pdf
 Requires at least: 4
-Tested up to: 4.5.3
+Tested up to: 4.7.3
 Stable tag: trunk
 Author: Shambix
 Author URI: http://www.shambix.com
@@ -134,6 +134,13 @@ Here's the full list and what they are set to, by default:
 
 
 == Changelog ==
+
+= 1.8.8 (9 mar 2017) =
+* Fixed issue with missing libraries
+
+= 1.8.7 (6 mar 2017) =
+* Fixed bug (pdf_layout.php not found)
+* Updated dompdf library to [v.0.8.0](https://github.com/dompdf/dompdf/releases/tag/v0.8.0)
 
 = 1.8.6 (29 jun 2016) =
 * Improvements to caching

@@ -17,14 +17,14 @@ global  $pdf_export_post_type,
 if(file_exists(SIMPLE_PDF_EXPORTER_CSS_FILE)) {
 	$pdf_export_css_file = SIMPLE_PDF_EXPORTER_CSS_FILE;
 } else {
-	$pdf_export_css_file = esc_url(plugins_url('assets/pdf_export.css', dirname(__FILE__)));
+	$pdf_export_css_file = SIMPLE_PDF_EXPORTER_PLUGIN.'assets/pdf_export.css';
 }
 
 // LAYOUT
 if(file_exists(SIMPLE_PDF_EXPORTER_LAYOUT_FILE)) {
 	require_once(SIMPLE_PDF_EXPORTER_LAYOUT_FILE);
 } else {
-	require_once(SIMPLE_PDF_EXPORTER_PROCESS.'assets/pdf_layout.php');
+	require_once(SIMPLE_PDF_EXPORTER_PLUGIN.'assets/pdf_layout.php');
 }
 
 /* --------------------------------------------------------------------------------
