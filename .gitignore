@@ -9,3 +9,4 @@ simple-pdf-exporter.zip
 *.db
 *.db-journal
 process/pdf_layout_custom.php
+libs/dompdf_old

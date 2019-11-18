@@ -3,7 +3,7 @@
 Contributors: Shambix, Dukessa
 Tags: pdf, dompdf, exporter, export, custom post types, export pdf, pdf collection, create pdf
 Requires at least: 4
-Tested up to: 4.7.3
+Tested up to: 5.3
 Stable tag: trunk
 Author: Shambix
 Author URI: http://www.shambix.com
