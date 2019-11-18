@@ -1,15 +1,13 @@
 === Simple PDF Exporter ===
 
 Contributors: Shambix, Dukessa
-Tags: pdf, dompdf, exporter, export, custom post types, export pdf, pdf collection, create pdf
+Author URL: http://www.shambix.com
 Requires at least: 4
 Tested up to: 5.3
 Stable tag: trunk
-Author: Shambix
-Author URI: http://www.shambix.com
-Plugin URI: https://wordpress.org/plugins/simple-pdf-exporter/
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Tags: pdf, dompdf, exporter, export, custom post types, export pdf, pdf collection, create pdf
 
 == Description ==
 
