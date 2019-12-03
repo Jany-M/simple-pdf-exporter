@@ -32,8 +32,18 @@ function simple_pdf_export_process(){
 
         $filename = $pdf_export_post_type.SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME.date('dMY').'.pdf';
 
+        // Handler
+        $pdf_handler = get_option('spe_pdfhandler');
+
+        // Debug
+        /*if(current_user_can('administrator')) {
+            echo '<pre>';
+            var_dump( get_option('spe_pdfhandler'));
+            echo '</pre>';
+        } exit;*/
+
         header('Content-type: application/pdf');
-        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Content-Disposition: '.$pdf_handler.'; filename="' . $filename . '"');
         header('Content-Transfer-Encoding: binary');
         header('Content-Length: ' . filesize($pdf_export_final_pdf));
         header('Accept-Ranges: bytes');

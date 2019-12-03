@@ -1,7 +1,7 @@
 === Simple PDF Exporter ===
 
 Contributors: Shambix, Dukessa
-Author URL: http://www.shambix.com
+Author URL: https://www.shambix.com
 Requires at least: 4
 Tested up to: 5.3
 Stable tag: trunk
@@ -15,6 +15,10 @@ Export a single PDF with all posts, or custom post types.
 You can also export a single post, or the exact number you need.
 
 > **IMPORTANT** This plugin requires at least 512MB of free RAM available, or it will timeout / return an error.
+
+This plugin is NOT recommended for people with no tech knowledge.
+The PDF layout/design is VERY basic and will require html/css/php technical knowledge to customize.
+Read more about this below.
 
 = The Basics =
 
@@ -30,11 +34,14 @@ If you don't use a custom url, hence you don't add the `post_type` parameter to 
 
 = The PDF Template =
 
-Currently, the template for the each exported post is very basic (and a table, since floating doesn't play nicely with the DOMPDF library), feel free to edit it here `wp-content/plugins/simple-pdf-exporter/process/pdf_layout.php`, **only if you know what you are doing**.
-Your layout must be echoed in php. eg. `echo '<div>the content goes here</div>';` or it won't show up in the PDF.
+Currently, the template and design for the exported pdf, is **very** basic (and posts are rendered as a table, since floating doesn't play nicely with the DOMPDF library).
 
-You can use a custom CSS to customize the layout.
-Create a pdf_export.css in your theme folder, otherwise the plugin's default (and really basic) CSS will be used (you can find it here `wp-content/plugins/simple-pdf-exporter/assets/pdf_export.css`)
+You can copy the plugin's basic structure from `wp-content/plugins/simple-pdf-exporter/assets/pdf_layout.php` inside your current theme and edit it.
+Your layout **must** be echoed in php, eg. `echo '<div>the content goes here</div>';` or it won't show up in the PDF.
+
+You can copy the plugin's basic CSS from `wp-content/plugins/simple-pdf-exporter/assets/pdf_export.css` inside your current theme and edit it.
+
+Do not edit directly the plugin's files `pdf_layout.php` and `pdf_export.css`, they will be overwritten with the next update.
 
 = Questions? =
 
@@ -132,6 +139,12 @@ Here's the full list and what they are set to, by default:
 
 
 == Changelog ==
+
+= 1.9 =
+* Added new option 'Download PDF or open in Tab'
+
+= 1.8.9 =
+* Tested with WP 5.3
 
 = 1.8.8 (9 mar 2017) =
 * Fixed issue with missing libraries
