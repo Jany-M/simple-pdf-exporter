@@ -126,7 +126,7 @@ Here's the full list and what they are set to, by default:
 * define(SIMPLE_PDF_EXPORTER_PAGINATION', false);
 * define(SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
 * define(SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory().'/pdf_export.css');
-* define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory().'/pdf_export.php');
+* define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory().'/pdf_layout.php');
 * define('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME', '-');
 * define('DOMPDF_PAPER_SIZE', 'A4');
 * define('DOMPDF_PAPER_ORIENTATION', 'portrait');
@@ -137,8 +137,15 @@ Here's the full list and what they are set to, by default:
 * define('DOMPDF_MEDIATYPE', 'print');
 * define('DOMPDF_FONTHEIGHTRATIO', 1);
 
+= How do I debug the layout in HTML form instead of PDF? =
+You can set define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', true); in your `wp-config.php` file, just remember to comment the line or set to `false`, when you are done debugging.
+
 
 == Changelog ==
+
+= 1.9.1 = 
+* Fixed a bug where the the plugin was looking for file `pdf_export.php` in the current theme, instead of the correct filename `pdf_layout.php` - the file `pdf_export.php` will still work until the next update, please rename it asap (Thanks to `artifexmedia` for reporting the bug)
+* Added a line in the FAQ, explaining how to debug the layout in HTML
 
 = 1.9 =
 * Added new option 'Download PDF or open in Tab'

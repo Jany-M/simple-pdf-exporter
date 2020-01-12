@@ -3,7 +3,7 @@
  * Plugin Name: Simple PDF Exporter
  * Plugin URI: https://wordpress.org/plugins/simple-pdf-exporter/
  * Description: Export in a single PDF, all posts, a single one, or a custom post type. <strong>Requires at least 512MB of free RAM on your server.</strong>
- * Version: 1.9
+ * Version: 1.9.1
  * Author: Shambix
  * Author URI: http://www.shambix.com
  * License GPLv3
@@ -33,7 +33,13 @@
     if (!defined('SIMPLE_PDF_EXPORTER_CSS_FILE'))
         define('SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory().'/pdf_export.css');
     if (!defined('SIMPLE_PDF_EXPORTER_LAYOUT_FILE'))
-        define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory().'/pdf_export.php');
+        // fixing a bug here - legacy file pdf_export.php
+        if(file_exists(get_stylesheet_directory().'/pdf_export.php') && is_file(get_stylesheet_directory().'/pdf_export.php')) {
+            define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory().'/pdf_export.php');
+        // this is the correct one - pdf_layout.php
+        } else {
+            define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory().'/pdf_layout.php');
+        }
     if (!defined('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME'))
         define('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME', '-');
     // DOMPDF
