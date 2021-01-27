@@ -1,6 +1,5 @@
 <?php 
 
-
 if(!class_exists('SIMPLE_PDF_EXPORT_SETTINGS')) {
 
     class SIMPLE_PDF_EXPORT_SETTINGS  {
@@ -28,7 +27,7 @@ if(!class_exists('SIMPLE_PDF_EXPORT_SETTINGS')) {
             add_settings_section(
                 'simple_pdf_export_settings-section',
                 'Settings',
-                array(&$this, 'settings_section_simple_pdf_export_settings'),
+                array(&$this, 'settings_section_simple_pdf_export_template'),
                 'simple_pdf_export_settings'
             );
         }
@@ -109,6 +108,7 @@ if(!class_exists('SIMPLE_PDF_EXPORT_SETTINGS')) {
 
         // MENU CALLBACK
         public function simple_pdf_export_plugin_settings_page() {
+            //error_reporting(-1);
             if(!current_user_can('manage_options')) {
                 wp_die(__('You do not have sufficient permissions to access this page.'));
             }

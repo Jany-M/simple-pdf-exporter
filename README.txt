@@ -123,8 +123,9 @@ eg. define(SIMPLE_PDF_EXPORTER_PAGINATION', true);
 
 Here's the full list and what they are set to, by default:
 
-* define(SIMPLE_PDF_EXPORTER_PAGINATION', false);
-* define(SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
+* define('SIMPLE_PDF_EXPORTER_DEBUG', false); // if true, the output will be in html for debugging purposes
+* define('SIMPLE_PDF_EXPORTER_PAGINATION', false);
+* define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
 * define(SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory().'/pdf_export.css');
 * define('SIMPLE_PDF_EXPORTER_LAYOUT_FILE', get_stylesheet_directory().'/pdf_layout.php');
 * define('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME', '-');
@@ -132,7 +133,7 @@ Here's the full list and what they are set to, by default:
 * define('DOMPDF_PAPER_ORIENTATION', 'portrait');
 * define('DOMPDF_DPI', 72);
 * define('DOMPDF_ENABLE_REMOTE', true);
-* define('DOMPDF_ENABLE_HTML5', false);
+* define('DOMPDF_ENABLE_HTML5', true); // true by default, since v.1.9.2
 * define('DOMPDF_ENABLE_FONTSUBSETTING', true);
 * define('DOMPDF_MEDIATYPE', 'print');
 * define('DOMPDF_FONTHEIGHTRATIO', 1);
@@ -142,6 +143,13 @@ You can set define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', true); in your `wp-config.
 
 
 == Changelog ==
+
+= 1.9.2 = 
+* Fixed bug `Warning: call_user_func() expects parameter 1 to be a valid callback, class 'SIMPLE_PDF_EXPORT_SETTINGS' does not have a method 'settings_section_simple_pdf_export_settings' in /home/larucheiiz/www/wp-admin/includes/template.php on line 1643`
+* Updated some constants and added a debug one `SIMPLE_PDF_EXPORTER_DEBUG` which will output in html for debugging purposes
+* Updated DOMPDF to v.0.8.5
+* Tested with WP 5.4.1
+* Tested with PHP 7.3
 
 = 1.9.1 = 
 * Fixed a bug where the the plugin was looking for file `pdf_export.php` in the current theme, instead of the correct filename `pdf_layout.php` - the file `pdf_export.php` will still work until the next update, please rename it asap (Thanks to `artifexmedia` for reporting the bug)

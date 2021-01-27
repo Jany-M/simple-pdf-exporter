@@ -98,7 +98,7 @@ function create_pagenumber_merge() {
 			$html = create_pdf_layout($post,$term);
 
 			// WRITE TO HTML FILES - DEBUG ONLY
-			if(SIMPLE_PDF_EXPORTER_HTML_OUTPUT) {
+			if(SIMPLE_PDF_EXPORTER_HTML_OUTPUT || SIMPLE_PDF_EXPORTER_DEBUG) {
 				$file_to_save2 = SIMPLE_PDF_EXPORTER_EXPORT.'html/'.$post_id.'.html';
 				$myfile = fopen($file_to_save2, "w") or die("Unable to open file!");
 				$txt = $html;

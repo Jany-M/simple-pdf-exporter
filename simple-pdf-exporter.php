@@ -3,13 +3,24 @@
  * Plugin Name: Simple PDF Exporter
  * Plugin URI: https://wordpress.org/plugins/simple-pdf-exporter/
  * Description: Export in a single PDF, all posts, a single one, or a custom post type. <strong>Requires at least 512MB of free RAM on your server.</strong>
- * Version: 1.9.1
+ * Version: 1.9.2
  * Author: Shambix
  * Author URI: http://www.shambix.com
  * License GPLv3
 */
 
 //define('SIMPLE_PDF_EXPORTER_VERS', '1.9');
+
+/*--------------------------------------
+|                                      |
+|  DEBUG                   |
+|                                      |
+---------------------------------------*/
+
+define('SIMPLE_PDF_EXPORTER_DEBUG', true);
+if(SIMPLE_PDF_EXPORTER_DEBUG) {
+    define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', true);
+}
 
 /*--------------------------------------
 |                                      |
@@ -27,8 +38,10 @@
     	define('SIMPLE_PDF_EXPORTER_EXPORT', $upload_dir['basedir'].'/pdf-export/');
 
     /* dont edit these here, add them to your wp-config instead */
+
     if (!defined('SIMPLE_PDF_EXPORTER_PAGINATION'))
         define('SIMPLE_PDF_EXPORTER_PAGINATION', false);
+
     // LAYOUT AND CSS
     if (!defined('SIMPLE_PDF_EXPORTER_CSS_FILE'))
         define('SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory().'/pdf_export.css');
@@ -42,6 +55,7 @@
         }
     if (!defined('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME'))
         define('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME', '-');
+
     // DOMPDF
     if (!defined('DOMPDF_PAPER_SIZE'))
         define('DOMPDF_PAPER_SIZE', 'A4');
@@ -52,7 +66,7 @@
     if (!defined('DOMPDF_ENABLE_REMOTE'))
         define('DOMPDF_ENABLE_REMOTE', true);
     if (!defined('DOMPDF_ENABLE_HTML5'))
-        define('DOMPDF_ENABLE_HTML5', false);
+        define('DOMPDF_ENABLE_HTML5', true);
     if (!defined('DOMPDF_ENABLE_FONTSUBSETTING'))
         define('DOMPDF_ENABLE_FONTSUBSETTING', true);
     if (!defined('DOMPDF_MEDIATYPE'))
@@ -60,7 +74,9 @@
     if (!defined('DOMPDF_FONTHEIGHTRATIO'))
         define('DOMPDF_FONTHEIGHTRATIO', 1);
 
-        // DEBUG
+    // DEBUG
+    if (!defined('SIMPLE_PDF_EXPORTER_DEBUG'))
+        define('SIMPLE_PDF_EXPORTER_DEBUG', false);
     if (!defined('SIMPLE_PDF_EXPORTER_HTML_OUTPUT'))
         define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
 
