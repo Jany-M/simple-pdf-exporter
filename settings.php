@@ -1,5 +1,6 @@
 <?php 
 
+
 if(!class_exists('SIMPLE_PDF_EXPORT_SETTINGS')) {
 
     class SIMPLE_PDF_EXPORT_SETTINGS  {
@@ -108,7 +109,6 @@ if(!class_exists('SIMPLE_PDF_EXPORT_SETTINGS')) {
 
         // MENU CALLBACK
         public function simple_pdf_export_plugin_settings_page() {
-            //error_reporting(-1);
             if(!current_user_can('manage_options')) {
                 wp_die(__('You do not have sufficient permissions to access this page.'));
             }

@@ -20,6 +20,11 @@ function simple_pdf_export_process(){
     $pdf_posts_per_page = isset($_REQUEST['num']) ? $_REQUEST['num'] : -1;
     $pdf_export_check = isset($_REQUEST['export']) ? $_REQUEST['export'] : '';
     $pdf_export_force = isset($_REQUEST['force']);
+    
+    // Added by Lomix
+    /*$pdf_export_force2 = get_the_title( $pdf_export_post_id );
+    $product = wc_get_product( $pdf_export_post_id );
+    $productsku = $product->get_sku();*/
 
     $pdf_export_final_pdf = SIMPLE_PDF_EXPORTER_EXPORT.$pdf_export_post_type.SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME.date('dMY').'.pdf';
 

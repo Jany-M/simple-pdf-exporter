@@ -1,6 +1,7 @@
 <?php
 require_once(SIMPLE_PDF_EXPORTER_PROCESS.'config.php');
 use Dompdf\Dompdf;
+use PDFMerger\PDFMerger; // Added by Lomix
 
 /*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -20,7 +21,8 @@ function create_pagenumber_merge() {
 	}
 
 	// Merge Settings
-	$pdf = new DC_Rate_Plan_Pdf_All_PDFMerger;
+	//$pdf = new DC_Rate_Plan_Pdf_All_PDFMerger; // Removed by Lomix
+	$pdf = new PDFMerger; // Added by Lomix
 
 	// Page Number Settings
 	if(SIMPLE_PDF_EXPORTER_PAGINATION && $pdf_export_post_id == '' && $pdf_posts_per_page > 1) {
@@ -94,7 +96,8 @@ function create_pagenumber_merge() {
 		$file_to_save = SIMPLE_PDF_EXPORTER_EXPORT.'pdf/'.$post_id.'.pdf';
 
 		if ($pdf_export_force === true || !file_exists($file_to_save) || date("dMY-H", filemtime($file_to_save)) != date('dMY-H')) {
-
+			
+			$term = isset($term) ? $term : '';
 			$html = create_pdf_layout($post,$term);
 
 			// WRITE TO HTML FILES - DEBUG ONLY

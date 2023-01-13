@@ -3,23 +3,29 @@
  * Plugin Name: Simple PDF Exporter
  * Plugin URI: https://wordpress.org/plugins/simple-pdf-exporter/
  * Description: Export in a single PDF, all posts, a single one, or a custom post type. <strong>Requires at least 512MB of free RAM on your server.</strong>
- * Version: 1.9.2
+ * Version: 2.0
  * Author: Shambix
  * Author URI: http://www.shambix.com
  * License GPLv3
 */
 
-//define('SIMPLE_PDF_EXPORTER_VERS', '1.9');
+//define('SIMPLE_PDF_EXPORTER_VERS', '2.0');
 
 /*--------------------------------------
 |                                      |
-|  DEBUG                   |
+|  QUICK DEBUG                         |
 |                                      |
 ---------------------------------------*/
 
-define('SIMPLE_PDF_EXPORTER_DEBUG', true);
+//define('SIMPLE_PDF_EXPORTER_DEBUG', true);
+
+if (!defined('SIMPLE_PDF_EXPORTER_DEBUG')) {
+    define('SIMPLE_PDF_EXPORTER_DEBUG', false);
+}
 if(SIMPLE_PDF_EXPORTER_DEBUG) {
     define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', true);
+} else {
+    define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
 }
 
 /*--------------------------------------
@@ -32,16 +38,16 @@ if(SIMPLE_PDF_EXPORTER_DEBUG) {
 
     if (!defined('SIMPLE_PDF_EXPORTER_PLUGIN'))
 		define('SIMPLE_PDF_EXPORTER_PLUGIN', plugin_dir_path(__FILE__));
+    if (!defined('SIMPLE_PDF_EXPORTER_PLUGIN_URL'))
+		define('SIMPLE_PDF_EXPORTER_PLUGIN_URL', plugin_dir_url(__FILE__));
 	if (!defined('SIMPLE_PDF_EXPORTER_PROCESS'))
     	define('SIMPLE_PDF_EXPORTER_PROCESS', SIMPLE_PDF_EXPORTER_PLUGIN.'process/');
 	if (!defined('SIMPLE_PDF_EXPORTER_EXPORT'))
     	define('SIMPLE_PDF_EXPORTER_EXPORT', $upload_dir['basedir'].'/pdf-export/');
 
     /* dont edit these here, add them to your wp-config instead */
-
     if (!defined('SIMPLE_PDF_EXPORTER_PAGINATION'))
         define('SIMPLE_PDF_EXPORTER_PAGINATION', false);
-
     // LAYOUT AND CSS
     if (!defined('SIMPLE_PDF_EXPORTER_CSS_FILE'))
         define('SIMPLE_PDF_EXPORTER_CSS_FILE', get_stylesheet_directory().'/pdf_export.css');
@@ -55,6 +61,13 @@ if(SIMPLE_PDF_EXPORTER_DEBUG) {
         }
     if (!defined('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME'))
         define('SIMPLE_PDF_EXPORTER_EXTRA_FILE_NAME', '-');
+    
+    // Debug
+    if (defined('SIMPLE_PDF_EXPORTER_HTML_OUTPUT') && SIMPLE_PDF_EXPORTER_HTML_OUTPUT) {
+        if (!is_dir(SIMPLE_PDF_EXPORTER_EXPORT.'html/') || !file_exists(SIMPLE_PDF_EXPORTER_EXPORT.'html/')) {
+            mkdir(SIMPLE_PDF_EXPORTER_EXPORT.'html/', 0777, true);
+        }
+    }
 
     // DOMPDF
     if (!defined('DOMPDF_PAPER_SIZE'))
@@ -72,19 +85,7 @@ if(SIMPLE_PDF_EXPORTER_DEBUG) {
     if (!defined('DOMPDF_MEDIATYPE'))
         define('DOMPDF_MEDIATYPE', 'print');
     if (!defined('DOMPDF_FONTHEIGHTRATIO'))
-        define('DOMPDF_FONTHEIGHTRATIO', 1);
-
-    // DEBUG
-    if (!defined('SIMPLE_PDF_EXPORTER_DEBUG'))
-        define('SIMPLE_PDF_EXPORTER_DEBUG', false);
-    if (!defined('SIMPLE_PDF_EXPORTER_HTML_OUTPUT'))
-        define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', false);
-
-    if (SIMPLE_PDF_EXPORTER_HTML_OUTPUT) {
-        if (!is_dir(SIMPLE_PDF_EXPORTER_EXPORT.'html/') || !file_exists(SIMPLE_PDF_EXPORTER_EXPORT.'html/')) {
-            mkdir(SIMPLE_PDF_EXPORTER_EXPORT.'html/', 0777, true);
-        }
-    }
+        define('DOMPDF_FONTHEIGHTRATIO', 1);	
 
 /*--------------------------------------
 |                                      |

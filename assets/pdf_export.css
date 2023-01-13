@@ -1,34 +1,7 @@
-/* -------------------------------------------------------------------------------- 
-*
-* COVER PAGE - NOT PRESENT IN THE FREE PLUGIN VERSION, IF YOU NEED THIS FEATURE PLEASE ASK FOR A QUOTE -> info@shambix.com
-*
--------------------------------------------------------------------------------- */
-
-.cover_page { border-collapse: collapse; }
-.cover_page, .cover_page th, .cover_page td { border: 1px solid #999; }
-.cover_page, .cover_page th {  padding:10px; }
-.cover_page, .cover_page td {  padding-left:10px;  padding-top:3px; padding-bottom:3px; }
-
-/* -------------------------------------------------------------------------------- 
-*
-* INDEX PAGE - NOT PRESENT IN THE FREE PLUGIN VERSION, IF YOU NEED THIS FEATURE PLEASE ASK FOR A QUOTE -> info@shambix.com
-*
--------------------------------------------------------------------------------- */
-
-.index_page tr {padding:0; margin:0; height:5px}
-.index_page th {font-family:Arial, sans-serif;}
-
-/* -------------------------------------------------------------------------------- 
-*
-* SINGLE POST
-*
--------------------------------------------------------------------------------- */
-
 /* https://github.com/dompdf/dompdf/issues/1107 */
-tbody:before, tbody:after { display: none; }
 
 @page {margin: 10px;}
-body {margin: 0px;}
-body, .main_div {font-family:Arial,sans-serif;}
-p {margin: 15px auto;}
-td {border: none; margin: 0; padding: 0; overflow: hidden; }
+
+.pdf_export_body {margin: 25px 15px; font-family: Arial, sans-serif;}
+.pdf_export_wrapper img {width: 100%; height: auto; margin: 0 auto; display: block;}
+.pdf_export_p, p {padding:0; margin: 0 auto 10px;}

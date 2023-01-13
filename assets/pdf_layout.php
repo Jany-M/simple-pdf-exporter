@@ -17,23 +17,25 @@ if(!function_exists('create_pdf_layout')) {
 		<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 		<head>
 		<title>PDF EXPORT</title>
+		<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo $pdf_export_css_file; ?>" />
+
 		</head>
 
-		<body>
+		<body class="pdf_export_body">
 
 		<!-- CONTENT -->
-		<div class="main_div">
+		<div class="pdf_export_wrapper main_div">
 			
-				<h2><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></h2>
+			<h2><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></h2>
 
-				$post->post_content.
+			<p class="pdf_export_p"><?php echo $post->post_content; ?></p>
 
-		<!--  FOOTER -->
 		</body>
 		</html>
 
 		<?php
+
 		return ob_get_clean();
 	}
 

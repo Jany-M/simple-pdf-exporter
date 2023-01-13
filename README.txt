@@ -2,8 +2,8 @@
 
 Contributors: Shambix, Dukessa
 Author URL: https://www.shambix.com
-Requires at least: 4
-Tested up to: 5.3
+Requires at least: 5
+Tested up to: 6.1.1
 Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -47,7 +47,7 @@ Do not edit directly the plugin's files `pdf_layout.php` and `pdf_export.css`, t
 
 Check the FAQ before opening new threads in the forum!
 
-> Contact me if you want a **custom version of the plugin**, for a fee (contact form at [shambix.com](http://www.shambix.com)).
+> Contact me if you want a **custom version of the plugin**, for a fee (email on [shambix.com](https://www.shambix.com)).
 
 = Libraries & Credits =
 
@@ -143,6 +143,14 @@ You can set define('SIMPLE_PDF_EXPORTER_HTML_OUTPUT', true); in your `wp-config.
 
 
 == Changelog ==
+
+= 2.0 (13 jan 2023) =
+* Fixed some issues with pdf layout and pdf css. Current theme css is now loading before the pdf one (so you can easily overwrite its style and you don't get an unstyled pdf out of the box)
+* Tested with WP 6.6.1
+* Tested with PHP 8.1 (credits to Marijn Lomix @ Lomix)
+* Updated DOMPDF to v.2.0.1
+* Updated FPDF to v.1.82
+* Updated FPDI to v.2.3.1
 
 = 1.9.2 = 
 * Fixed bug `Warning: call_user_func() expects parameter 1 to be a valid callback, class 'SIMPLE_PDF_EXPORT_SETTINGS' does not have a method 'settings_section_simple_pdf_export_settings' in /home/larucheiiz/www/wp-admin/includes/template.php on line 1643`
